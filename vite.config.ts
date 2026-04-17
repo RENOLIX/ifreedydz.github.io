@@ -7,6 +7,7 @@ import react from "@vitejs/plugin-react-swc";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
+  base: "/ifreedydz.github.io/",
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {

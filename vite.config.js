@@ -5,6 +5,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 var __dirname = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
+    base: "/ifreedydz.github.io/",
     plugins: [react(), tailwindcss()],
     resolve: {
         alias: {
