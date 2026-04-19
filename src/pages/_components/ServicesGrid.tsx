@@ -98,7 +98,7 @@ export default function ServicesGrid() {
                     <img
                       src={service.image}
                       alt={service.title}
-                      className="h-full w-full object-cover object-center saturate-0 transition-transform duration-500 group-hover:scale-105 group-hover:saturate-100"
+                      className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
                 ) : null}

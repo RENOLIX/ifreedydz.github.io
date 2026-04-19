@@ -25,7 +25,7 @@ export default function Hero() {
           className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-foreground/5 px-3 py-1.5 text-xs font-medium uppercase tracking-wide text-muted-foreground"
         >
           <span className="inline-block h-1.5 w-1.5 rounded-full bg-green-500" />
-          Specialiste Apple certifie
+          Service Apple a Cheraga
         </motion.div>
 
         <motion.h1
