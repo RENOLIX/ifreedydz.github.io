@@ -26,6 +26,7 @@ export default function RepairFormPage() {
   }, [category, issueSlugs]);
 
   if (!category || !brand || !model) return null;
+  const displayImage = model.largeImage ?? brand.largeImage ?? model.image;
 
   return (
     <div className="min-h-screen bg-white text-foreground">
@@ -44,9 +45,11 @@ export default function RepairFormPage() {
             <div className="mt-6 grid gap-8 lg:grid-cols-[0.82fr_1.18fr]">
               <div className="rounded-[32px] bg-[#f5f5f7] p-8">
                 <img
-                  src={model.image}
+                  src={displayImage}
                   alt={model.name}
-                  className="mx-auto h-auto w-full max-w-[440px] object-contain"
+                  loading="eager"
+                  decoding="async"
+                  className="mx-auto h-auto w-full max-w-[500px] object-contain"
                 />
 
                 <div className="mt-8 space-y-4">

@@ -18,6 +18,8 @@ export default function RepairBrandPage() {
     return brand.models.filter((model) => model.name.toLowerCase().includes(normalized));
   }, [brand, query]);
 
+  const brandDisplayImage = brand?.largeImage ?? brand?.image;
+
   if (!category || !brand) return null;
 
   return (
@@ -37,9 +39,11 @@ export default function RepairBrandPage() {
             <div className="mt-6 grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
               <div className="rounded-[32px] bg-[#f5f5f7] p-8">
                 <img
-                  src={brand.image}
+                  src={brandDisplayImage}
                   alt={brand.name}
-                  className="mx-auto h-auto w-full max-w-[320px] object-contain"
+                  loading="eager"
+                  decoding="async"
+                  className="mx-auto h-auto w-full max-w-[460px] object-contain"
                 />
               </div>
 

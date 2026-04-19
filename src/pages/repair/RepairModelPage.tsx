@@ -117,6 +117,8 @@ export default function RepairModelPage() {
   const currentCategory = category;
   const currentBrand = brand;
   const currentModel = model;
+  const currentDisplayImage =
+    currentModel.largeImage ?? currentBrand.largeImage ?? currentModel.image;
 
   function toggleIssue(issueSlug: string) {
     setSelectedIssues((current) =>
@@ -154,9 +156,11 @@ export default function RepairModelPage() {
             <div className="mt-6 grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
               <div className="rounded-[32px] bg-[#f5f5f7] p-8">
                 <img
-                  src={currentModel.image}
+                  src={currentDisplayImage}
                   alt={currentModel.name}
-                  className="mx-auto h-auto w-full max-w-[440px] object-contain"
+                  loading="eager"
+                  decoding="async"
+                  className="mx-auto h-auto w-full max-w-[500px] object-contain"
                 />
               </div>
 

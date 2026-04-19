@@ -15,12 +15,14 @@ export type RepairModel = {
   slug: string;
   name: string;
   image: string;
+  largeImage?: string;
 };
 
 export type RepairBrand = {
   slug: string;
   name: string;
   image: string;
+  largeImage?: string;
   models: RepairModel[];
 };
 
@@ -171,11 +173,37 @@ export const repairCategories: RepairCategory[] = [
         slug: "google",
         name: "Google",
         image: "https://fdn2.gsmarena.com/vv/bigpic/google-pixel-9-pro-xl-.jpg",
+        largeImage:
+          "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/P9P9PThumbnail_16x9_Opt2_2.width-1300.jpg",
         models: [
-          { slug: "pixel-9-pro-xl", name: "Pixel 9 Pro XL", image: "https://fdn2.gsmarena.com/vv/bigpic/google-pixel-9-pro-xl-.jpg" },
-          { slug: "pixel-9-pro", name: "Pixel 9 Pro", image: "https://fdn2.gsmarena.com/vv/bigpic/google-pixel-9-pro-.jpg" },
-          { slug: "pixel-9", name: "Pixel 9", image: "https://fdn2.gsmarena.com/vv/bigpic/google-pixel-9-.jpg" },
-          { slug: "pixel-8a", name: "Pixel 8a", image: "https://fdn2.gsmarena.com/vv/bigpic/google-pixel-8a.jpg" },
+          {
+            slug: "pixel-9-pro-xl",
+            name: "Pixel 9 Pro XL",
+            image: "https://fdn2.gsmarena.com/vv/bigpic/google-pixel-9-pro-xl-.jpg",
+            largeImage:
+              "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/P9P9PThumbnail_16x9_Opt2_2.width-1300.jpg",
+          },
+          {
+            slug: "pixel-9-pro",
+            name: "Pixel 9 Pro",
+            image: "https://fdn2.gsmarena.com/vv/bigpic/google-pixel-9-pro-.jpg",
+            largeImage:
+              "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/P9P9PThumbnail_16x9_Opt2_2.width-1300.jpg",
+          },
+          {
+            slug: "pixel-9",
+            name: "Pixel 9",
+            image: "https://fdn2.gsmarena.com/vv/bigpic/google-pixel-9-.jpg",
+            largeImage:
+              "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/image_P9_2024Q2_Peony_LT_T-Shot_.width-1000.format-webp_SVFKGQ9.webp",
+          },
+          {
+            slug: "pixel-8a",
+            name: "Pixel 8a",
+            image: "https://fdn2.gsmarena.com/vv/bigpic/google-pixel-8a.jpg",
+            largeImage:
+              "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/P9P9PThumbnail_16x9_Opt2_2.width-1300.jpg",
+          },
         ],
       },
       {
