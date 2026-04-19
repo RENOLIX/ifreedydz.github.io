@@ -1,141 +1,82 @@
+import { useMemo, useState } from "react";
 import { motion } from "motion/react";
-import {
-  Battery,
-  Camera,
-  Droplets,
-  HardDrive,
-  Monitor,
-  Smartphone,
-  Tablet,
-} from "lucide-react";
-
-const services = [
-  {
-    icon: Smartphone,
-    title: "Reparation iPhone",
-    description:
-      "Ecran casse, batterie, camera, boutons, connecteur Lightning et USB-C. Tous modeles iPhone 6 a iPhone 16 Pro Max.",
-    image:
-      "https://images.unsplash.com/photo-1746005718007-2cc042848478?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600",
-    tag: "Le + demande",
-  },
-  {
-    icon: Monitor,
-    title: "Reparation MacBook",
-    description:
-      "Dalle, clavier, carte mere, SSD, ventilateur. MacBook Air et Pro, iMac, Mac Mini. Diagnostic offert.",
-    image:
-      "https://images.unsplash.com/photo-1628251069007-b467f279337d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600",
-  },
-  {
-    icon: Tablet,
-    title: "Reparation iPad",
-    description:
-      "Remplacement vitre et ecran OLED/LCD, connecteur, camera et batterie pour tous les modeles iPad.",
-    image:
-      "https://images.unsplash.com/photo-1746005514010-93d5fc20e85a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600",
-  },
-  {
-    icon: HardDrive,
-    title: "Recuperation de donnees",
-    description:
-      "Specialiste recuperation donnees Apple - iPhone noye, Mac qui ne demarre plus, SSD endommage. Taux de reussite 95%.",
-    image:
-      "https://images.unsplash.com/photo-1708264956639-4395da08a3c8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600",
-    tag: "Expertise unique",
-  },
-  {
-    icon: Camera,
-    title: "Reparation lens camera",
-    description:
-      "Remplacement du lens camera iPhone et iPad, verre arriere fissure, protection d'objectif abimee et image brouillee.",
-    image:
-      "https://images.unsplash.com/photo-1512790182412-b19e6d62bc39?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    icon: Battery,
-    title: "Remplacement batterie",
-    description:
-      "Batterie originale Apple ou certifiee haute capacite. Autonomie retrouvee en 30 minutes, garantie 6 mois.",
-    image:
-      "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    icon: Droplets,
-    title: "Degat des eaux",
-    description:
-      "Nettoyage ultrasonique et reparation carte mere apres contact avec l'eau. Intervention rapide 24h.",
-    image:
-      "https://images.unsplash.com/photo-1516724562728-afc824a36e84?auto=format&fit=crop&w=900&q=80",
-  },
-];
+import { Link } from "react-router-dom";
+import { Search } from "lucide-react";
+import { repairCategories } from "@/data/repair";
 
 export default function ServicesGrid() {
+  const [query, setQuery] = useState("");
+
+  const services = useMemo(() => {
+    const normalized = query.trim().toLowerCase();
+    if (!normalized) return repairCategories;
+    return repairCategories.filter((service) =>
+      service.name.toLowerCase().includes(normalized),
+    );
+  }, [query]);
+
   return (
     <section id="services" className="bg-white py-28">
-      <div className="mx-auto max-w-[980px] px-6">
+      <div className="mx-auto max-w-[1120px] px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
+          className="mb-14 text-center"
         >
           <p className="mb-3 text-sm font-medium uppercase tracking-widest text-muted-foreground">
             Nos services
           </p>
           <h2 className="text-4xl font-bold tracking-tight md:text-5xl">
-            Tout pour vos appareils Apple.
+            Quel appareil souhaitez-vous faire reparer ?
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-lg font-light text-muted-foreground">
-            Des reparations rapides, des pieces de qualite, et une expertise
-            certifiee sur toute la gamme Apple.
+            Recherchez votre appareil ici puis choisissez la categorie qui
+            correspond a votre besoin.
           </p>
+
+          <div className="relative mx-auto mt-8 max-w-xl">
+            <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <input
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Recherchez votre appareil ici"
+              className="w-full rounded-full border border-border bg-[#f5f5f7] py-3 pl-11 pr-4 text-sm outline-none transition-colors focus:border-foreground/20"
+            />
+          </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, index) => {
-            const Icon = service.icon;
-
-            return (
-              <motion.div
-                key={service.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.07 }}
-                className="group relative cursor-pointer overflow-hidden rounded-2xl bg-[#f5f5f7] transition-transform duration-300 hover:scale-[1.02]"
+        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+          {services.map((service, index) => (
+            <motion.div
+              key={service.slug}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: index * 0.06 }}
+            >
+              <Link
+                to={`/reparation/${service.slug}`}
+                className="group block overflow-hidden rounded-[28px] border border-border bg-white shadow-[0_18px_50px_rgba(15,23,42,0.06)] transition-transform duration-300 hover:-translate-y-1"
               >
-                {service.image ? (
-                  <div className="h-44 overflow-hidden">
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      loading="lazy"
-                      decoding="async"
-                      className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
-                ) : null}
-                <div className="p-6">
-                  {service.tag ? (
-                    <span className="mb-2 inline-block rounded-full bg-foreground px-2.5 py-0.5 text-xs font-semibold text-background">
-                      {service.tag}
-                    </span>
-                  ) : null}
-                  <div className="mb-2 flex items-center gap-3">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white shadow-sm">
-                      <Icon className="h-4 w-4 text-foreground" />
-                    </div>
-                    <h3 className="text-[17px] font-semibold">{service.title}</h3>
-                  </div>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {service.description}
-                  </p>
+                <div className="aspect-square overflow-hidden bg-[#f5f5f7] p-5">
+                  <img
+                    src={service.heroImage}
+                    alt={service.name}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full rounded-[22px] object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
                 </div>
-              </motion.div>
-            );
-          })}
+                <div className="border-t border-border/70 px-4 py-4 text-center">
+                  <h3 className="text-sm font-semibold leading-6 md:text-base">
+                    {service.name}
+                  </h3>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

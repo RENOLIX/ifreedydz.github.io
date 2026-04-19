@@ -1,37 +1,28 @@
 import { motion } from "motion/react";
 import { ChevronDown } from "lucide-react";
-import Threads from "@/components/effects/Threads";
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-white pt-14">
-      <div className="absolute inset-0 opacity-[0.2]">
-        <Threads
-          amplitude={1}
-          distance={0.1}
-          enableMouseInteraction={false}
-          threadColor={[0.18, 0.18, 0.2]}
-        />
-      </div>
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(0,0,0,0.04),transparent)]" />
-
-      <div
-        className="absolute inset-0 opacity-[0.08]"
-        style={{
-          backgroundImage:
-            "url(https://images.unsplash.com/photo-1746005718007-2cc042848478?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          filter: "blur(46px) saturate(0)",
-        }}
+    <section className="relative flex min-h-[108svh] flex-col items-center justify-center overflow-hidden bg-white px-0 pb-18 pt-14 md:min-h-[112svh] md:pb-24">
+      <img
+        src="https://i.ibb.co/zWQjTdcJ/Chat-GPT-Image-19-avr-2026-19-18-23.png"
+        alt="Atelier iFreedy mobile"
+        className="absolute inset-0 h-full w-full object-cover object-[center_46%] md:hidden"
       />
+      <img
+        src="https://i.ibb.co/7tnF64dS/Chat-GPT-Image-19-avr-2026-19-23-11.png"
+        alt="Atelier iFreedy desktop"
+        className="absolute inset-0 hidden h-full w-full object-cover object-[center_42%] md:block"
+      />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.36),rgba(0,0,0,0.48))]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(255,255,255,0.14),transparent)]" />
 
       <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-foreground/5 px-3 py-1.5 text-xs font-medium uppercase tracking-wide text-muted-foreground"
+          className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-xs font-medium uppercase tracking-wide text-white/90 backdrop-blur-sm"
         >
           <span className="inline-block h-1.5 w-1.5 rounded-full bg-green-500" />
           Service Apple a Cheraga
@@ -41,11 +32,12 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
-          className="mb-6 text-5xl font-bold leading-[1.05] tracking-tight text-balance md:text-7xl"
+          className="mb-6 text-5xl font-bold leading-[1.05] tracking-tight text-balance text-white md:text-7xl"
+          style={{ textShadow: "0 0 24px rgba(255,255,255,0.22), 0 12px 30px rgba(0,0,0,0.48)" }}
         >
           Vos appareils Apple
           <br />
-          <span className="font-light text-muted-foreground">
+          <span className="font-light text-white/90">
             entre de bonnes mains.
           </span>
         </motion.h1>
@@ -54,7 +46,8 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.22, ease: "easeOut" }}
-          className="mx-auto mb-10 max-w-2xl text-xl font-light leading-relaxed text-muted-foreground md:text-2xl"
+          className="mx-auto mb-10 max-w-2xl text-xl font-light leading-relaxed text-white/92 md:text-2xl"
+          style={{ textShadow: "0 8px 22px rgba(0,0,0,0.48)" }}
         >
           iFreedy prend en charge la reparation iPhone, iPad, MacBook et la
           recuperation de donnees avec une expertise dediee a l&apos;univers
@@ -85,7 +78,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-16 flex flex-wrap items-center justify-center gap-8 text-sm text-muted-foreground"
+          className="mt-16 flex flex-wrap items-center justify-center gap-8 text-sm text-white/85"
         >
           {[
             { value: "10 000+", label: "reparations reussies" },
@@ -94,10 +87,13 @@ export default function Hero() {
             { value: "6 mois", label: "de garantie" },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
-              <div className="text-2xl font-semibold text-foreground">
+              <div
+                className="text-2xl font-semibold text-white"
+                style={{ textShadow: "0 10px 24px rgba(0,0,0,0.45)" }}
+              >
                 {stat.value}
               </div>
-              <div className="mt-0.5 text-xs uppercase tracking-wide">
+              <div className="mt-0.5 text-xs uppercase tracking-wide text-white/80">
                 {stat.label}
               </div>
             </div>
@@ -109,7 +105,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2, duration: 0.6 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-muted-foreground"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/85"
       >
         <motion.div
           animate={{ y: [0, 6, 0] }}

@@ -2,19 +2,19 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Menu, X } from "lucide-react";
 
-const links = [
-  { label: "Services", href: "#services" },
-  { label: "Pourquoi nous", href: "#pourquoi" },
-  { label: "Avis", href: "#avis" },
-  { label: "Contact", href: "#contact" },
-];
-
 const brandLogo =
   "https://i.ibb.co/nMN7s0zm/Whats-App-Image-2026-04-16-at-18-45-45.png";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const homeBase = import.meta.env.BASE_URL || "/";
+  const links = [
+    { label: "Services", href: `${homeBase}#services` },
+    { label: "Pourquoi nous", href: `${homeBase}#pourquoi` },
+    { label: "Avis", href: `${homeBase}#avis` },
+    { label: "Contact", href: `${homeBase}#contact` },
+  ];
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20);
@@ -34,7 +34,7 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-[980px] mx-auto px-6 h-14 flex items-center justify-between">
-        <a href="#" className="flex items-center select-none">
+        <a href={homeBase} className="flex items-center select-none">
           <img
             src={brandLogo}
             alt="Logo iFreedy"
@@ -55,7 +55,7 @@ export default function Navbar() {
         </nav>
 
         <a
-          href="#contact"
+          href={`${homeBase}#contact`}
           className="hidden md:inline-flex items-center px-4 py-2 rounded-full bg-foreground text-background text-sm font-medium hover:bg-foreground/80 transition-colors cursor-pointer"
         >
           Prendre RDV
@@ -91,7 +91,7 @@ export default function Navbar() {
                 </a>
               ))}
               <a
-                href="#contact"
+                href={`${homeBase}#contact`}
                 className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-foreground text-background text-sm font-medium cursor-pointer"
                 onClick={() => setMobileOpen(false)}
               >
