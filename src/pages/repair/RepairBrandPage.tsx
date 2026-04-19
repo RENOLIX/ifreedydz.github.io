@@ -4,6 +4,7 @@ import { ChevronLeft, Search } from "lucide-react";
 import Navbar from "@/pages/_components/Navbar";
 import Footer from "@/pages/_components/Footer";
 import { getBrand, getCategory } from "@/data/repair";
+import { getBrandAsset, getModelAsset } from "@/lib/repair-assets";
 
 export default function RepairBrandPage() {
   const { categorySlug = "", brandSlug = "" } = useParams();
@@ -17,8 +18,6 @@ export default function RepairBrandPage() {
     if (!normalized) return brand.models;
     return brand.models.filter((model) => model.name.toLowerCase().includes(normalized));
   }, [brand, query]);
-
-  const brandDisplayImage = brand?.largeImage ?? brand?.image;
 
   if (!category || !brand) return null;
 
@@ -39,7 +38,7 @@ export default function RepairBrandPage() {
             <div className="mt-6 grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
               <div className="rounded-[32px] bg-[#f5f5f7] p-8">
                 <img
-                  src={brandDisplayImage}
+                  src={getBrandAsset(category.slug, brand.slug)}
                   alt={brand.name}
                   loading="eager"
                   decoding="async"
@@ -83,7 +82,7 @@ export default function RepairBrandPage() {
               >
                 <div className="aspect-square overflow-hidden bg-[#fafafa] p-5">
                   <img
-                    src={model.image}
+                    src={getModelAsset(category.slug, brand.slug, model.slug)}
                     alt={model.name}
                     loading="lazy"
                     decoding="async"

@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 import { Search } from "lucide-react";
 import { repairCategories } from "@/data/repair";
+import { getCategoryAsset } from "@/lib/repair-assets";
 
 export default function ServicesGrid() {
   const [query, setQuery] = useState("");
@@ -62,7 +63,7 @@ export default function ServicesGrid() {
               >
                 <div className="aspect-square overflow-hidden bg-[#f5f5f7] p-5">
                   <img
-                    src={service.heroImage}
+                    src={getCategoryAsset(service.slug)}
                     alt={service.name}
                     loading="lazy"
                     decoding="async"

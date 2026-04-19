@@ -1,16 +1,17 @@
 import { motion } from "motion/react";
 import { ChevronDown } from "lucide-react";
+import { getHeroBackgroundAsset } from "@/lib/repair-assets";
 
 export default function Hero() {
   return (
     <section className="relative flex min-h-[108svh] flex-col items-center justify-center overflow-hidden bg-white px-0 pb-18 pt-14 md:min-h-[112svh] md:pb-24">
       <img
-        src="https://i.ibb.co/zWQjTdcJ/Chat-GPT-Image-19-avr-2026-19-18-23.png"
+        src={getHeroBackgroundAsset("mobile")}
         alt="Atelier iFreedy mobile"
         className="absolute inset-0 h-full w-full object-cover object-[center_46%] md:hidden"
       />
       <img
-        src="https://i.ibb.co/7tnF64dS/Chat-GPT-Image-19-avr-2026-19-23-11.png"
+        src={getHeroBackgroundAsset("desktop")}
         alt="Atelier iFreedy desktop"
         className="absolute inset-0 hidden h-full w-full object-cover object-[center_42%] md:block"
       />

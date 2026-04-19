@@ -4,6 +4,7 @@ import { ChevronLeft, MapPin, Phone } from "lucide-react";
 import Navbar from "@/pages/_components/Navbar";
 import Footer from "@/pages/_components/Footer";
 import { getBrand, getCategory, getModel } from "@/data/repair";
+import { getModelAsset } from "@/lib/repair-assets";
 import { siteContact } from "@/lib/site";
 
 export default function RepairFormPage() {
@@ -26,8 +27,6 @@ export default function RepairFormPage() {
   }, [category, issueSlugs]);
 
   if (!category || !brand || !model) return null;
-  const displayImage = model.largeImage ?? brand.largeImage ?? model.image;
-
   return (
     <div className="min-h-screen bg-white text-foreground">
       <Navbar />
@@ -45,7 +44,7 @@ export default function RepairFormPage() {
             <div className="mt-6 grid gap-8 lg:grid-cols-[0.82fr_1.18fr]">
               <div className="rounded-[32px] bg-[#f5f5f7] p-8">
                 <img
-                  src={displayImage}
+                  src={getModelAsset(category.slug, brand.slug, model.slug)}
                   alt={model.name}
                   loading="eager"
                   decoding="async"

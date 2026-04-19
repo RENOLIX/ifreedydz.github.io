@@ -144,7 +144,7 @@ export default function WhyUs() {
             className="relative h-72 border-t border-border/70 md:h-96"
           >
             <img
-              src="https://images.unsplash.com/photo-1746005718013-b24074afb701?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080"
+              src="https://images.unsplash.com/photo-1746005718013-b24074afb701?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1920"
               alt="Atelier iFreedy"
               className="h-full w-full object-cover"
             />

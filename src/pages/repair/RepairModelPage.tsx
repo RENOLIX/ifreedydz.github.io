@@ -36,6 +36,7 @@ import {
 import Navbar from "@/pages/_components/Navbar";
 import Footer from "@/pages/_components/Footer";
 import { getBrand, getCategory, getModel } from "@/data/repair";
+import { getModelAsset } from "@/lib/repair-assets";
 import { cn } from "@/lib/utils";
 
 const iconMap = {
@@ -117,9 +118,6 @@ export default function RepairModelPage() {
   const currentCategory = category;
   const currentBrand = brand;
   const currentModel = model;
-  const currentDisplayImage =
-    currentModel.largeImage ?? currentBrand.largeImage ?? currentModel.image;
-
   function toggleIssue(issueSlug: string) {
     setSelectedIssues((current) =>
       current.includes(issueSlug)
@@ -156,7 +154,11 @@ export default function RepairModelPage() {
             <div className="mt-6 grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
               <div className="rounded-[32px] bg-[#f5f5f7] p-8">
                 <img
-                  src={currentDisplayImage}
+                  src={getModelAsset(
+                    currentCategory.slug,
+                    currentBrand.slug,
+                    currentModel.slug,
+                  )}
                   alt={currentModel.name}
                   loading="eager"
                   decoding="async"

@@ -4,6 +4,7 @@ import { Search } from "lucide-react";
 import Navbar from "@/pages/_components/Navbar";
 import Footer from "@/pages/_components/Footer";
 import { getCategory } from "@/data/repair";
+import { getBrandAsset, getCategoryAsset } from "@/lib/repair-assets";
 
 export default function RepairCategoryPage() {
   const { categorySlug = "" } = useParams();
@@ -30,7 +31,7 @@ export default function RepairCategoryPage() {
       <main className="pt-24">
         <section className="relative overflow-hidden px-6 py-18 md:py-24">
           <img
-            src={category.heroImage}
+            src={getCategoryAsset(category.slug)}
             alt={category.name}
             className="absolute inset-0 h-full w-full object-cover opacity-12"
           />
@@ -70,7 +71,7 @@ export default function RepairCategoryPage() {
               >
                 <div className="aspect-square overflow-hidden bg-[#f8f8fa] p-5">
                   <img
-                    src={brand.image}
+                    src={getBrandAsset(category.slug, brand.slug)}
                     alt={brand.name}
                     loading="lazy"
                     decoding="async"
