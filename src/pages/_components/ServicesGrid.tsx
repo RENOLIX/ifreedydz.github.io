@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import {
   Battery,
+  Camera,
   Droplets,
   HardDrive,
   Monitor,
@@ -44,16 +45,28 @@ const services = [
     tag: "Expertise unique",
   },
   {
+    icon: Camera,
+    title: "Reparation lens camera",
+    description:
+      "Remplacement du lens camera iPhone et iPad, verre arriere fissure, protection d'objectif abimee et image brouillee.",
+    image:
+      "https://images.unsplash.com/photo-1512790182412-b19e6d62bc39?auto=format&fit=crop&w=900&q=80",
+  },
+  {
     icon: Battery,
     title: "Remplacement batterie",
     description:
       "Batterie originale Apple ou certifiee haute capacite. Autonomie retrouvee en 30 minutes, garantie 6 mois.",
+    image:
+      "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?auto=format&fit=crop&w=900&q=80",
   },
   {
     icon: Droplets,
     title: "Degat des eaux",
     description:
       "Nettoyage ultrasonique et reparation carte mere apres contact avec l'eau. Intervention rapide 24h.",
+    image:
+      "https://images.unsplash.com/photo-1516724562728-afc824a36e84?auto=format&fit=crop&w=900&q=80",
   },
 ];
 
@@ -98,6 +111,8 @@ export default function ServicesGrid() {
                     <img
                       src={service.image}
                       alt={service.title}
+                      loading="lazy"
+                      decoding="async"
                       className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>

@@ -1,19 +1,28 @@
 import { motion } from "motion/react";
 import { ChevronDown } from "lucide-react";
+import Threads from "@/components/effects/Threads";
 
 export default function Hero() {
   return (
     <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-white pt-14">
+      <div className="absolute inset-0 opacity-[0.2]">
+        <Threads
+          amplitude={1}
+          distance={0.1}
+          enableMouseInteraction={false}
+          threadColor={[0.18, 0.18, 0.2]}
+        />
+      </div>
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(0,0,0,0.04),transparent)]" />
 
       <div
-        className="absolute inset-0 opacity-10"
+        className="absolute inset-0 opacity-[0.08]"
         style={{
           backgroundImage:
             "url(https://images.unsplash.com/photo-1746005718007-2cc042848478?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080)",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          filter: "blur(40px) saturate(0)",
+          filter: "blur(46px) saturate(0)",
         }}
       />
 
