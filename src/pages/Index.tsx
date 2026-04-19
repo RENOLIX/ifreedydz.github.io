@@ -1,6 +1,7 @@
 import Navbar from "./_components/Navbar";
 import Hero from "./_components/Hero";
 import ServicesGrid from "./_components/ServicesGrid";
+import MotherboardSection from "./_components/MotherboardSection";
 import WhyUs from "./_components/WhyUs";
 import Testimonials from "./_components/Testimonials";
 import ContactSection from "./_components/ContactSection";
@@ -12,6 +13,7 @@ export default function Index() {
       <Navbar />
       <Hero />
       <ServicesGrid />
+      <MotherboardSection />
       <WhyUs />
       <Testimonials />
       <ContactSection />
