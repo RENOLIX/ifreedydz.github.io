@@ -13,7 +13,7 @@ void main() {
 }
 `;
 
-const fragmentShader = `
+const createFragmentShader = (lineCount: number) => `
 precision highp float;
 
 uniform float iTime;
@@ -25,7 +25,7 @@ uniform vec2 uMouse;
 
 #define PI 3.1415926538
 
-const int u_line_count = 40;
+const int u_line_count = ${lineCount};
 const float u_line_width = 7.0;
 const float u_line_blur = 10.0;
 
@@ -136,7 +136,7 @@ export default function Threads({
 }: ThreadsProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const animationFrameId = useRef<number | undefined>(undefined);
-  const [isReady, setIsReady] = useState(false);
+  const [renderMode, setRenderMode] = useState<"mobile" | "desktop" | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -144,9 +144,9 @@ export default function Threads({
     const isLargeScreen = window.matchMedia("(min-width: 768px)").matches;
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (!isLargeScreen || prefersReducedMotion) return;
+    if (prefersReducedMotion) return;
 
-    const start = () => setIsReady(true);
+    const start = () => setRenderMode(isLargeScreen ? "desktop" : "mobile");
 
     const idleWindow = window as Window & {
       requestIdleCallback?: (
@@ -157,21 +157,27 @@ export default function Threads({
     };
 
     if (idleWindow.requestIdleCallback) {
-      const idleId = idleWindow.requestIdleCallback(start, { timeout: 1200 });
+      const idleId = idleWindow.requestIdleCallback(start, {
+        timeout: isLargeScreen ? 1200 : 800,
+      });
       return () => idleWindow.cancelIdleCallback?.(idleId);
     }
 
-    const timeoutId = window.setTimeout(start, 250);
+    const timeoutId = window.setTimeout(start, isLargeScreen ? 250 : 350);
     return () => window.clearTimeout(timeoutId);
   }, []);
 
   useEffect(() => {
-    if (!containerRef.current || !isReady) return;
+    if (!containerRef.current || !renderMode) return;
 
     const container = containerRef.current;
+    const isMobile = renderMode === "mobile";
     let isMounted = true;
+    let isVisible = true;
     let cleanupMouseListeners: (() => void) | undefined;
     let cleanupResizeListener: (() => void) | undefined;
+    let cleanupVisibilityListener: (() => void) | undefined;
+    let cleanupIntersectionObserver: (() => void) | undefined;
     let rendererCanvas: HTMLCanvasElement | undefined;
     let glContext: WebGLRenderingContext | null = null;
 
@@ -181,7 +187,7 @@ export default function Threads({
 
       const renderer = new Renderer({
         alpha: true,
-        dpr: Math.min(window.devicePixelRatio, 1.25),
+        dpr: isMobile ? 0.85 : Math.min(window.devicePixelRatio, 1.25),
       });
       const gl = renderer.gl;
       glContext = gl;
@@ -195,7 +201,7 @@ export default function Threads({
       const geometry = new Triangle(gl);
       const program = new Program(gl, {
         vertex: vertexShader,
-        fragment: fragmentShader,
+        fragment: createFragmentShader(isMobile ? 22 : 40),
         uniforms: {
           iTime: { value: 0 },
           iResolution: {
@@ -206,8 +212,8 @@ export default function Threads({
             ),
           },
           uColor: { value: new Color(...threadColor) },
-          uAmplitude: { value: amplitude },
-          uDistance: { value: distance },
+          uAmplitude: { value: isMobile ? amplitude * 0.72 : amplitude },
+          uDistance: { value: isMobile ? distance * 0.82 : distance },
           uMouse: { value: new Float32Array([0.5, 0.5]) },
         },
       });
@@ -225,6 +231,24 @@ export default function Threads({
       window.addEventListener("resize", resize, { passive: true });
       cleanupResizeListener = () => window.removeEventListener("resize", resize);
       resize();
+
+      const handleVisibilityChange = () => {
+        isVisible = document.visibilityState === "visible";
+      };
+
+      document.addEventListener("visibilitychange", handleVisibilityChange);
+      cleanupVisibilityListener = () =>
+        document.removeEventListener("visibilitychange", handleVisibilityChange);
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          isVisible = Boolean(entry?.isIntersecting) && document.visibilityState === "visible";
+        },
+        { threshold: 0.08 },
+      );
+
+      observer.observe(container);
+      cleanupIntersectionObserver = () => observer.disconnect();
 
       let currentMouse: [number, number] = [0.5, 0.5];
       let targetMouse: [number, number] = [0.5, 0.5];
@@ -249,8 +273,18 @@ export default function Threads({
         };
       }
 
+      let lastRenderTime = 0;
+      const minFrameInterval = isMobile ? 1000 / 30 : 1000 / 60;
+
       function update(time: number) {
         if (!isMounted) return;
+
+        animationFrameId.current = window.requestAnimationFrame(update);
+
+        if (!isVisible) return;
+        if (time - lastRenderTime < minFrameInterval) return;
+
+        lastRenderTime = time;
 
         if (enableMouseInteraction) {
           const smoothing = 0.05;
@@ -265,7 +299,6 @@ export default function Threads({
 
         program.uniforms.iTime.value = time * 0.001;
         renderer.render({ scene: mesh });
-        animationFrameId.current = window.requestAnimationFrame(update);
       }
 
       animationFrameId.current = window.requestAnimationFrame(update);
@@ -278,6 +311,8 @@ export default function Threads({
       if (animationFrameId.current) window.cancelAnimationFrame(animationFrameId.current);
       cleanupResizeListener?.();
       cleanupMouseListeners?.();
+      cleanupVisibilityListener?.();
+      cleanupIntersectionObserver?.();
 
       if (rendererCanvas && container.contains(rendererCanvas)) {
         container.removeChild(rendererCanvas);
@@ -285,7 +320,7 @@ export default function Threads({
 
       glContext?.getExtension("WEBGL_lose_context")?.loseContext();
     };
-  }, [amplitude, threadColor, distance, enableMouseInteraction, isReady]);
+  }, [amplitude, threadColor, distance, enableMouseInteraction, renderMode]);
 
   return <div ref={containerRef} className="threads-container" {...rest} />;
 }
