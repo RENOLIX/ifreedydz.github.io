@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState, type FormEvent } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { ChevronLeft, MapPin, Phone } from "lucide-react";
 import Navbar from "@/pages/_components/Navbar";
@@ -26,7 +26,80 @@ export default function RepairFormPage() {
     return category.issues.filter((issue) => issueSlugs.includes(issue.slug));
   }, [category, issueSlugs]);
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formFeedback, setFormFeedback] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
+
   if (!category || !brand || !model) return null;
+
+  const selectedCategory = category;
+  const selectedBrand = brand;
+  const selectedModel = model;
+  const summaryText = `Service: ${selectedCategory.name}\nMarque: ${selectedBrand.name}\nModele: ${selectedModel.name}\nPannes: ${issues.map((issue) => issue.label).join(", ")}`;
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (!siteContact.web3FormsAccessKey || siteContact.web3FormsAccessKey === "YOUR_WEB3FORMS_ACCESS_KEY") {
+      setFormFeedback({
+        type: "error",
+        message:
+          "Ajoutez d'abord votre cle Web3Forms dans src/lib/site.ts pour activer l'envoi.",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    setFormFeedback(null);
+
+    const formData = new FormData(event.currentTarget);
+    formData.set("access_key", siteContact.web3FormsAccessKey);
+    formData.set("subject", `Nouvelle demande iFreedy - ${selectedModel.name}`);
+    formData.set("from_name", siteContact.storeName);
+    formData.set("replyto", String(formData.get("email") ?? ""));
+    formData.set("service", selectedCategory.name);
+    formData.set("marque", selectedBrand.name);
+    formData.set("modele", selectedModel.name);
+    formData.set("pannes", issues.map((issue) => issue.label).join(", "));
+    formData.set("resume", String(formData.get("resume") ?? summaryText));
+    formData.set("botcheck", "");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: formData,
+      });
+
+      const payload = await response.json();
+
+      if (!response.ok || !payload.success) {
+        throw new Error(payload.message || "Impossible d'envoyer votre demande.");
+      }
+
+      event.currentTarget.reset();
+      setFormFeedback({
+        type: "success",
+        message:
+          "Votre demande a bien ete envoyee. L'atelier iFreedy vous recontacte rapidement.",
+      });
+    } catch (error) {
+      setFormFeedback({
+        type: "error",
+        message:
+          error instanceof Error
+            ? error.message
+            : "Une erreur est survenue pendant l'envoi.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
   return (
     <div className="min-h-screen bg-white text-foreground">
       <Navbar />
@@ -110,17 +183,18 @@ export default function RepairFormPage() {
                   est deja prepare.
                 </p>
 
-                <form
-                  onSubmit={(event) => event.preventDefault()}
-                  className="mt-10 grid gap-4 md:grid-cols-2"
-                >
+                <form onSubmit={handleSubmit} className="mt-10 grid gap-4 md:grid-cols-2">
+                  <input type="hidden" name="access_key" value={siteContact.web3FormsAccessKey} />
+                  <input type="hidden" name="botcheck" className="hidden" />
                   <div>
                     <label className="mb-2 block text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
                       Nom complet
                     </label>
                     <input
+                      name="name"
                       type="text"
                       placeholder="Votre nom"
+                      required
                       className="w-full rounded-2xl bg-[#f5f5f7] px-4 py-3.5 text-sm outline-none focus:ring-2 focus:ring-foreground/15"
                     />
                   </div>
@@ -129,8 +203,10 @@ export default function RepairFormPage() {
                       Telephone
                     </label>
                     <input
+                      name="phone"
                       type="text"
                       placeholder="Votre numero"
+                      required
                       className="w-full rounded-2xl bg-[#f5f5f7] px-4 py-3.5 text-sm outline-none focus:ring-2 focus:ring-foreground/15"
                     />
                   </div>
@@ -139,8 +215,10 @@ export default function RepairFormPage() {
                       Email
                     </label>
                     <input
+                      name="email"
                       type="email"
                       placeholder="Votre email"
+                      required
                       className="w-full rounded-2xl bg-[#f5f5f7] px-4 py-3.5 text-sm outline-none focus:ring-2 focus:ring-foreground/15"
                     />
                   </div>
@@ -149,8 +227,9 @@ export default function RepairFormPage() {
                       Resume de la demande
                     </label>
                     <textarea
+                      name="resume"
                       rows={4}
-                      defaultValue={`Service: ${category.name}\nMarque: ${brand.name}\nModele: ${model.name}\nPannes: ${issues.map((issue) => issue.label).join(", ")}`}
+                      defaultValue={summaryText}
                       className="w-full rounded-2xl bg-[#f5f5f7] px-4 py-3.5 text-sm outline-none focus:ring-2 focus:ring-foreground/15"
                     />
                   </div>
@@ -159,6 +238,7 @@ export default function RepairFormPage() {
                       Message complementaire
                     </label>
                     <textarea
+                      name="message"
                       rows={5}
                       placeholder="Ajoutez un detail utile: urgence, panne apres chute, appareil qui chauffe, piece deja changee..."
                       className="w-full rounded-2xl bg-[#f5f5f7] px-4 py-3.5 text-sm outline-none focus:ring-2 focus:ring-foreground/15"
@@ -167,10 +247,26 @@ export default function RepairFormPage() {
                   <div className="md:col-span-2">
                     <button
                       type="submit"
-                      className="w-full rounded-full bg-foreground px-6 py-3.5 text-sm font-semibold text-background transition-colors hover:bg-foreground/85"
+                      disabled={isSubmitting}
+                      className="w-full rounded-full bg-foreground px-6 py-3.5 text-sm font-semibold text-background transition-colors hover:bg-foreground/85 disabled:cursor-not-allowed disabled:opacity-60"
                     >
-                      Envoyer la demande
+                      {isSubmitting ? "Envoi en cours..." : "Envoyer la demande"}
                     </button>
+                    <p className="mt-3 text-xs leading-6 text-muted-foreground">
+                      Formulaire connecte a Web3Forms. La cle d&apos;acces se modifie dans
+                      <span className="font-medium text-foreground"> src/lib/site.ts</span>.
+                    </p>
+                    {formFeedback ? (
+                      <p
+                        className={`mt-3 text-sm ${
+                          formFeedback.type === "success"
+                            ? "text-emerald-600"
+                            : "text-red-600"
+                        }`}
+                      >
+                        {formFeedback.message}
+                      </p>
+                    ) : null}
                   </div>
                 </form>
               </div>

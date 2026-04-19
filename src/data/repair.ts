@@ -3,7 +3,8 @@ export type RepairCategorySlug =
   | "tablette"
   | "apple-watch"
   | "ordinateur"
-  | "mac";
+  | "mac"
+  | "console";
 
 export type RepairIssue = {
   slug: string;
@@ -105,6 +106,19 @@ const macIssues: RepairIssue[] = [
   { slug: "autre", label: "Autre panne", icon: "circle-ellipsis" },
 ];
 
+const consoleIssues: RepairIssue[] = [
+  { slug: "hdmi-video", label: "Port HDMI / image", icon: "monitor" },
+  { slug: "ne-sallume-plus", label: "Ne s'allume plus", icon: "power" },
+  { slug: "surchauffe", label: "Surchauffe / ventilation", icon: "fan" },
+  { slug: "lecteur-disque", label: "Lecteur disque", icon: "hard-drive" },
+  { slug: "stockage", label: "Stockage / SSD", icon: "database" },
+  { slug: "manette", label: "Connexion manette", icon: "wifi" },
+  { slug: "reseau", label: "Reseau / Wi-Fi", icon: "wifi" },
+  { slug: "mise-a-jour", label: "Blocage logiciel", icon: "lock" },
+  { slug: "degat-liquide", label: "Degat liquide", icon: "droplets" },
+  { slug: "autre", label: "Autre panne", icon: "circle-ellipsis" },
+];
+
 const applePhoneModels: RepairModel[] = [
   { slug: "iphone-8", name: "iPhone 8", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-8-new.jpg" },
   { slug: "iphone-8-plus", name: "iPhone 8 Plus", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-8-plus-new.jpg" },
@@ -140,6 +154,86 @@ const applePhoneModels: RepairModel[] = [
   { slug: "iphone-17", name: "iPhone 17", image: "https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/iphone-17-hero.png" },
   { slug: "iphone-17-pro", name: "iPhone 17 Pro", image: "https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/iphone-17-pro-17-pro-max-hero.png" },
   { slug: "iphone-17-pro-max", name: "iPhone 17 Pro Max", image: "https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/iphone-17-pro-17-pro-max-hero.png" },
+];
+
+const appleTabletModels: RepairModel[] = [
+  { slug: "ipad-air-2", name: "iPad Air 2 (2014)", image: "https://support.apple.com/kb/sp708" },
+  { slug: "ipad-mini-4", name: "iPad mini 4 (2015)", image: "https://support.apple.com/es-us/112002" },
+  { slug: "ipad-pro-12-9-2015", name: "iPad Pro 12.9 (2015)", image: "https://support.apple.com/kb/SP723?locale=en_US" },
+  { slug: "ipad-pro-9-7-2016", name: "iPad Pro 9.7 (2016)", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-ipad-pro-97.jpg" },
+  { slug: "ipad-5-2017", name: "iPad 5 (2017)", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-ipad-97-2017.jpg" },
+  { slug: "ipad-pro-10-5-2017", name: "iPad Pro 10.5 (2017)", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-ipad-pro-105-2017.jpg" },
+  { slug: "ipad-pro-12-9-2017", name: "iPad Pro 12.9 (2017)", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-ipad-pro-129-2017.jpg" },
+  { slug: "ipad-6-2018", name: "iPad 6 (2018)", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-ipad-97-2018.jpg" },
+  { slug: "ipad-pro-11-2018", name: "iPad Pro 11 (2018)", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-ipad-pro-11-2018.jpg" },
+  { slug: "ipad-pro-12-9-2018", name: "iPad Pro 12.9 (2018)", image: "https://support.apple.com/kb/SP785?locale=en_US" },
+  { slug: "ipad-mini-5", name: "iPad mini 5 (2019)", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-ipad-mini-2019.jpg" },
+  { slug: "ipad-air-3", name: "iPad Air 3 (2019)", image: "https://support.apple.com/en-us/111939" },
+  { slug: "ipad-7-2019", name: "iPad 7 (2019)", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-ipad7-102-inches.jpg" },
+  { slug: "ipad-air-4", name: "iPad Air 4 (2020)", image: "https://support.apple.com/en-la/111905" },
+  { slug: "ipad-8-2020", name: "iPad 8 (2020)", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-ipad8-102-inches-2020.jpg" },
+  { slug: "ipad-pro-11-2021", name: "iPad Pro 11 (2021)", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-ipad-pro-11-2021.jpg" },
+  { slug: "ipad-pro-12-9-2021", name: "iPad Pro 12.9 (2021)", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-ipad-pro-129-2021.jpg" },
+  { slug: "ipad-9", name: "iPad 9 (2021)", image: "https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111898_sp849-ipad-9gen-480.png" },
+  { slug: "ipad-mini-6", name: "iPad mini 6 (2021)", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-ipad-mini-2021.jpg" },
+  { slug: "ipad-air-5", name: "iPad Air 5 (2022)", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-ipad-air-2022-new.jpg" },
+  { slug: "ipad-10", name: "iPad 10 (2022)", image: "https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111840_sp884-ipad-10gen-960.png" },
+  { slug: "ipad-pro-11-2022", name: "iPad Pro 11 (2022)", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-ipad-pro-11-2022.jpg" },
+  { slug: "ipad-pro-12-9-2022", name: "iPad Pro 12.9 (2022)", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-ipad-pro-129-2022.jpg" },
+  { slug: "ipad-mini-a17-pro", name: "iPad mini (A17 Pro) (2024)", image: "https://support.apple.com/en-euro/121456" },
+  { slug: "ipad-air-11-m2", name: "iPad Air 11 M2 (2024)", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-ipad-air-11-2024.jpg" },
+  { slug: "ipad-air-13-m2", name: "iPad Air 13 M2 (2024)", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-ipad-air-13-2024.jpg" },
+  { slug: "ipad-pro-11-m4", name: "iPad Pro 11 M4 (2024)", image: "https://support.apple.com/en-us/119892" },
+  { slug: "ipad-pro-13-m4", name: "iPad Pro 13 M4 (2024)", image: "https://support.apple.com/en-us/119892" },
+  { slug: "ipad-a16", name: "iPad (A16) (2025)", image: "https://support.apple.com/en-us/122240" },
+  { slug: "ipad-air-11-m3", name: "iPad Air 11 M3 (2025)", image: "https://support.apple.com/en-us/122241" },
+  { slug: "ipad-air-13-m3", name: "iPad Air 13 M3 (2025)", image: "https://support.apple.com/122242" },
+  { slug: "ipad-air-11-m4", name: "iPad Air 11 M4 (2026)", image: "https://support.apple.com/en-us/126471" },
+  { slug: "ipad-air-13-m4", name: "iPad Air 13 M4 (2026)", image: "https://support.apple.com/en-us/126472" },
+];
+
+const macModels: RepairModel[] = [
+  { slug: "macbook-12", name: "MacBook", image: "https://support.apple.com/es-us/111986" },
+  { slug: "macbook-air", name: "MacBook Air", image: "https://support.apple.com/en-lamr/122210" },
+  { slug: "macbook-pro", name: "MacBook Pro", image: "https://support.apple.com/en-lamr/121552" },
+  { slug: "imac", name: "iMac", image: "https://www.apple.com/imac/" },
+  { slug: "mac-pro", name: "Mac Pro", image: "https://www.apple.com/mac-pro/" },
+];
+
+const playstationModels: RepairModel[] = [
+  {
+    slug: "ps4",
+    name: "PlayStation 4",
+    image:
+      "https://gmedia.playstation.com/is/image/SIEPDC/ps4-slim-image-block-01-en-24jul20?$1600px--t$",
+  },
+  {
+    slug: "ps5",
+    name: "PlayStation 5",
+    image:
+      "https://gmedia.playstation.com/is/image/SIEPDC/PS5-Slim-Beauty-image-block-01-en-27jan26?$1600px$",
+  },
+];
+
+const xboxModels: RepairModel[] = [
+  {
+    slug: "xbox-series-x",
+    name: "Xbox Series X",
+    image:
+      "https://assets.xboxservices.com/assets/3c/9b/3c9bce6a-acf7-481b-b2e6-d34cc9a6b311.jpg?n=XSX_Hero_768_Backward-Compatibility_1084x1561.jpg",
+  },
+  {
+    slug: "xbox-series-s",
+    name: "Xbox Series S",
+    image:
+      "https://assets.xboxservices.com/assets/b5/94/b59425a6-0ae3-46fb-b2f9-65e290a67eff.jpg?n=Xbox-Series-S_Bubbles-Super-Hero-768_1084x1300_02.jpg",
+  },
+  {
+    slug: "xbox-one-x",
+    name: "Xbox One X",
+    image:
+      "https://assets.xboxservices.com/assets/5f/71/5f718c07-e06f-41a4-b459-91d930f20135.jpg?n=X1X_Image_0_Console_1920x660.jpg",
+  },
 ];
 
 export const repairCategories: RepairCategory[] = [
@@ -256,22 +350,14 @@ export const repairCategories: RepairCategory[] = [
     slug: "tablette",
     name: "Reparation tablette",
     title: "Quelle tablette souhaitez-vous faire reparer ?",
-    heroImage: "https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111840_sp884-ipad-10gen-960.png",
+    heroImage: "https://support.apple.com/en-us/122240",
     issues: tabletIssues,
     brands: [
       {
         slug: "apple",
         name: "Apple",
-        image: "https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111840_sp884-ipad-10gen-960.png",
-        models: [
-          { slug: "ipad-9", name: "iPad 9", image: "https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111898_sp849-ipad-9gen-480.png" },
-          { slug: "ipad-10", name: "iPad 10", image: "https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111840_sp884-ipad-10gen-960.png" },
-          { slug: "ipad-air-5", name: "iPad Air 5", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-ipad-air-2022-new.jpg" },
-          { slug: "ipad-air-13-m2", name: "iPad Air 13 M2", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-ipad-air-13-2024.jpg" },
-          { slug: "ipad-mini-6", name: "iPad mini 6", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-ipad-mini-2021.jpg" },
-          { slug: "ipad-pro-11-m4", name: "iPad Pro 11 M4", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-ipad-pro-11-2024.jpg" },
-          { slug: "ipad-pro-13-m4", name: "iPad Pro 13 M4", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-ipad-pro-13-2024.jpg" },
-        ],
+        image: "https://support.apple.com/en-us/122240",
+        models: appleTabletModels,
       },
       {
         slug: "samsung",
@@ -398,22 +484,38 @@ export const repairCategories: RepairCategory[] = [
     slug: "mac",
     name: "Reparation Mac",
     title: "Quel Mac souhaitez-vous faire reparer ?",
-    heroImage: "https://cdsassets.apple.com/live/7WUAS350/images/macbook-air/2024-macbook-air-15in-m3-colors.png",
+    heroImage: "https://support.apple.com/en-lamr/122210",
     issues: macIssues,
     brands: [
       {
         slug: "apple",
         name: "Apple",
-        image: "https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111340_macbook-pro-2023-14in.png",
-        models: [
-          { slug: "macbook-air-13-m2", name: "MacBook Air 13 M2", image: "https://cdsassets.apple.com/live/7WUAS350/images/macbook-air/2022-macbook-air-m2-colors.png" },
-          { slug: "macbook-air-15-m3", name: "MacBook Air 15 M3", image: "https://cdsassets.apple.com/live/7WUAS350/images/macbook-air/2024-macbook-air-15in-m3-colors.png" },
-          { slug: "macbook-pro-14", name: "MacBook Pro 14", image: "https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111340_macbook-pro-2023-14in.png" },
-          { slug: "macbook-pro-16", name: "MacBook Pro 16", image: "https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111838_macbook-pro-2023-16in.png" },
-          { slug: "imac-24", name: "iMac 24", image: "https://cdsassets.apple.com/live/7WUAS350/images/imac/imac-24in-2024-four-ports-colors.png" },
-          { slug: "mac-mini", name: "Mac mini", image: "https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111837_mac-mini-2023-m2-pro.png" },
-          { slug: "mac-studio", name: "Mac Studio", image: "https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/mac-studio-2025.png" },
-        ],
+        image: "https://support.apple.com/en-lamr/122210",
+        models: macModels,
+      },
+    ],
+  },
+  {
+    slug: "console",
+    name: "Reparation console",
+    title: "Quelle console souhaitez-vous faire reparer ?",
+    heroImage:
+      "https://gmedia.playstation.com/is/image/SIEPDC/ps5-product-thumbnail-01-en-14sep21?$1600px$",
+    issues: consoleIssues,
+    brands: [
+      {
+        slug: "playstation",
+        name: "PlayStation",
+        image:
+          "https://gmedia.playstation.com/is/image/SIEPDC/ps5-product-thumbnail-01-en-14sep21?$1600px$",
+        models: playstationModels,
+      },
+      {
+        slug: "xbox",
+        name: "Xbox",
+        image:
+          "https://assets.xboxservices.com/assets/3c/9b/3c9bce6a-acf7-481b-b2e6-d34cc9a6b311.jpg?n=XSX_Hero_768_Backward-Compatibility_1084x1561.jpg",
+        models: xboxModels,
       },
     ],
   },

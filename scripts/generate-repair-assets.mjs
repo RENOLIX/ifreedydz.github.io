@@ -86,6 +86,25 @@ async function fetchImage(url) {
       throw new Error(`HTTP ${response.status}`);
     }
 
+    const contentType = response.headers.get("content-type") ?? "";
+    if (contentType.includes("text/html")) {
+      const html = await response.text();
+      const match =
+        html.match(/property="og:image"\s+content="([^"]+)"/i) ??
+        html.match(/name="twitter:image(?::src)?"\s+content="([^"]+)"/i) ??
+        html.match(/https:\/\/cdsassets\.apple\.com[^"'\\\s>]+/i) ??
+        html.match(/https:\/\/assets\.xboxservices\.com[^"'\\\s>]+(?:png|jpg|jpeg|webp)/i) ??
+        html.match(/https:\/\/gmedia\.playstation\.com\/is\/image\/[^"'\\\s>]+/i);
+
+      const imageUrl = match?.[1] ?? match?.[0];
+
+      if (!imageUrl) {
+        throw new Error(`No og:image found for ${url}`);
+      }
+
+      return fetchImage(imageUrl.replace(/&amp;/g, "&"));
+    }
+
     const arrayBuffer = await response.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
     const metadata = await sharp(buffer, { animated: false }).metadata();
