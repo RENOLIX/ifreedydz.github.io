@@ -4,6 +4,7 @@ import { ChevronLeft, MapPin, Phone } from "lucide-react";
 import Navbar from "@/pages/_components/Navbar";
 import Footer from "@/pages/_components/Footer";
 import { getBrand, getCategory, getModel } from "@/data/repair";
+import { siteContact } from "@/lib/site";
 
 export default function RepairFormPage() {
   const [searchParams] = useSearchParams();
@@ -45,7 +46,7 @@ export default function RepairFormPage() {
                 <img
                   src={model.image}
                   alt={model.name}
-                  className="mx-auto h-auto w-full max-w-[320px] object-contain"
+                  className="mx-auto h-auto w-full max-w-[440px] object-contain"
                 />
 
                 <div className="mt-8 space-y-4">
@@ -82,13 +83,13 @@ export default function RepairFormPage() {
                   <div className="flex items-start gap-3">
                     <MapPin className="mt-0.5 h-4 w-4 text-foreground" />
                     <p className="text-sm leading-7 text-muted-foreground">
-                      Amara, Rue Alioua Fodil, Cheraga 16014, Algerie
+                      {siteContact.address}
                     </p>
                   </div>
                   <div className="mt-3 flex items-start gap-3">
                     <Phone className="mt-0.5 h-4 w-4 text-foreground" />
                     <p className="text-sm leading-7 text-muted-foreground">
-                      023 36 15 50 / 0561 32 18 04
+                      {siteContact.landline} / {siteContact.mobile}
                     </p>
                   </div>
                 </div>

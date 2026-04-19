@@ -1,13 +1,17 @@
 import { useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
+  BatteryLow,
   Battery,
   Camera,
+  CameraOff,
   ChevronLeft,
   CircleEllipsis,
+  CircleHelp,
   Cpu,
   Database,
   Droplets,
+  Ear,
   Fan,
   Flame,
   Gauge,
@@ -16,6 +20,7 @@ import {
   HeartPulse,
   Keyboard,
   Lock,
+  LockOpen,
   Monitor,
   PlugZap,
   Power,
@@ -60,6 +65,40 @@ const iconMap = {
   wifi: Wifi,
   wrench: Wrench,
 } as const;
+
+function getIssueIcon(issueSlug: string, fallback: keyof typeof iconMap) {
+  switch (issueSlug) {
+    case "ecran-casse":
+    case "vitre-ecran":
+    case "ecran":
+      return Smartphone;
+    case "batterie-morte":
+    case "batterie":
+      return BatteryLow;
+    case "lentille-camera":
+    case "camera":
+    case "camera-probleme":
+      return CameraOff;
+    case "probleme-charge":
+    case "charge":
+    case "connecteur":
+      return PlugZap;
+    case "degat-liquide":
+      return Droplets;
+    case "micro-hautparleur":
+    case "hautparleur":
+      return Ear;
+    case "blocage":
+      return LockOpen;
+    case "dos-casse":
+    case "boitier":
+      return ShieldAlert;
+    case "autre":
+      return CircleHelp;
+    default:
+      return iconMap[fallback] ?? Wrench;
+  }
+}
 
 export default function RepairModelPage() {
   const navigate = useNavigate();
@@ -117,7 +156,7 @@ export default function RepairModelPage() {
                 <img
                   src={currentModel.image}
                   alt={currentModel.name}
-                  className="mx-auto h-auto w-full max-w-[360px] object-contain"
+                  className="mx-auto h-auto w-full max-w-[440px] object-contain"
                 />
               </div>
 
@@ -154,7 +193,10 @@ export default function RepairModelPage() {
           <div className="mx-auto max-w-[1120px]">
             <div className="grid grid-cols-2 gap-4 md:grid-cols-4 xl:grid-cols-5">
               {currentCategory.issues.map((issue) => {
-                const Icon = iconMap[issue.icon as keyof typeof iconMap] ?? Wrench;
+                const Icon = getIssueIcon(
+                  issue.slug,
+                  issue.icon as keyof typeof iconMap,
+                );
                 const isActive = selectedIssues.includes(issue.slug);
 
                 return (
@@ -163,14 +205,25 @@ export default function RepairModelPage() {
                     type="button"
                     onClick={() => toggleIssue(issue.slug)}
                     className={cn(
-                      "rounded-[26px] border p-5 text-left transition-all duration-200",
+                      "flex min-h-[158px] flex-col items-center justify-center rounded-[26px] border px-4 py-5 text-center transition-all duration-200",
                       isActive
                         ? "border-foreground bg-foreground text-background shadow-[0_18px_40px_rgba(15,23,42,0.12)]"
                         : "border-border bg-white hover:-translate-y-0.5 hover:shadow-[0_16px_40px_rgba(15,23,42,0.06)]",
                     )}
                   >
-                    <Icon className={cn("h-5 w-5", isActive ? "text-background" : "text-foreground")} />
-                    <p className={cn("mt-4 text-sm font-semibold leading-6", isActive ? "text-background" : "text-foreground")}>
+                    <Icon
+                      strokeWidth={1.7}
+                      className={cn(
+                        "h-10 w-10",
+                        isActive ? "text-background" : "text-foreground",
+                      )}
+                    />
+                    <p
+                      className={cn(
+                        "mt-4 text-sm font-semibold leading-6",
+                        isActive ? "text-background" : "text-foreground",
+                      )}
+                    >
                       {issue.label}
                     </p>
                   </button>

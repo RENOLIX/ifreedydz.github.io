@@ -131,13 +131,13 @@ const applePhoneModels: RepairModel[] = [
   { slug: "iphone-15-plus", name: "iPhone 15 Plus", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-15-plus-.jpg" },
   { slug: "iphone-15-pro", name: "iPhone 15 Pro", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-15-pro.jpg" },
   { slug: "iphone-15-pro-max", name: "iPhone 15 Pro Max", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-15-pro-max.jpg" },
-  { slug: "iphone-16", name: "iPhone 16", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-15.jpg" },
-  { slug: "iphone-16-plus", name: "iPhone 16 Plus", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-15-plus-.jpg" },
-  { slug: "iphone-16-pro", name: "iPhone 16 Pro", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-15-pro.jpg" },
-  { slug: "iphone-16-pro-max", name: "iPhone 16 Pro Max", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-15-pro-max.jpg" },
-  { slug: "iphone-17", name: "iPhone 17", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-15.jpg" },
-  { slug: "iphone-17-pro", name: "iPhone 17 Pro", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-15-pro.jpg" },
-  { slug: "iphone-17-pro-max", name: "iPhone 17 Pro Max", image: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-15-pro-max.jpg" },
+  { slug: "iphone-16", name: "iPhone 16", image: "https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/iphone-16.png" },
+  { slug: "iphone-16-plus", name: "iPhone 16 Plus", image: "https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/121030-iphone-16-plus.png" },
+  { slug: "iphone-16-pro", name: "iPhone 16 Pro", image: "https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/121031-iphone-16-pro.png" },
+  { slug: "iphone-16-pro-max", name: "iPhone 16 Pro Max", image: "https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/121032-iphone-16-pro-max.png" },
+  { slug: "iphone-17", name: "iPhone 17", image: "https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/iphone-17-hero.png" },
+  { slug: "iphone-17-pro", name: "iPhone 17 Pro", image: "https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/iphone-17-pro-17-pro-max-hero.png" },
+  { slug: "iphone-17-pro-max", name: "iPhone 17 Pro Max", image: "https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/iphone-17-pro-17-pro-max-hero.png" },
 ];
 
 export const repairCategories: RepairCategory[] = [
@@ -145,13 +145,13 @@ export const repairCategories: RepairCategory[] = [
     slug: "telephone",
     name: "Reparation telephone",
     title: "Quel telephone souhaitez-vous faire reparer ?",
-    heroImage: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-15-pro-max.jpg",
+    heroImage: "https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/iphone-17-pro-17-pro-max-hero.png",
     issues: phoneIssues,
     brands: [
       {
         slug: "apple",
         name: "Apple",
-        image: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-15-pro-max.jpg",
+        image: "https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/iphone-17-pro-17-pro-max-hero.png",
         models: applePhoneModels,
       },
       {

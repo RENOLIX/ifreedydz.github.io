@@ -1,4 +1,4 @@
-const locationUrl = "https://share.google/A13iUukS6ghnGd6VR";
+import { siteContact } from "@/lib/site";
 
 const footerLinks = [
   {
@@ -24,8 +24,9 @@ const footerLinks = [
     title: "Contact",
     links: [
       "Voir notre emplacement",
-      "Numero a renseigner",
-      "Email a renseigner",
+      siteContact.mobile,
+      siteContact.landline,
+      siteContact.email,
       "Entreprise iFreedy",
     ],
   },
@@ -58,9 +59,23 @@ export default function Footer() {
                   <li key={link}>
                     {link === "Voir notre emplacement" ? (
                       <a
-                        href={locationUrl}
+                        href={siteContact.mapsUrl}
                         target="_blank"
                         rel="noreferrer"
+                        className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white"
+                      >
+                        {link}
+                      </a>
+                    ) : link === siteContact.email ? (
+                      <a
+                        href={`mailto:${siteContact.email}`}
+                        className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white"
+                      >
+                        {link}
+                      </a>
+                    ) : link === siteContact.mobile || link === siteContact.landline ? (
+                      <a
+                        href={`tel:${link}`}
                         className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white"
                       >
                         {link}
