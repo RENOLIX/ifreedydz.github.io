@@ -5,6 +5,7 @@ import Navbar from "@/pages/_components/Navbar";
 import Footer from "@/pages/_components/Footer";
 import { getCategory } from "@/data/repair";
 import { getBrandAsset, getCategoryAsset } from "@/lib/repair-assets";
+import { NotFoundPage } from "@/pages/NotFound";
 
 export default function RepairCategoryPage() {
   const { categorySlug = "" } = useParams();
@@ -23,7 +24,7 @@ export default function RepairCategoryPage() {
     );
   }, [category, query]);
 
-  if (!category) return null;
+  if (!category) return <NotFoundPage />;
 
   return (
     <div className="min-h-screen bg-white text-foreground">

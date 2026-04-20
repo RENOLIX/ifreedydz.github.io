@@ -5,6 +5,7 @@ import Navbar from "@/pages/_components/Navbar";
 import Footer from "@/pages/_components/Footer";
 import { getBrand, getCategory } from "@/data/repair";
 import { getBrandAsset, getModelAsset } from "@/lib/repair-assets";
+import { NotFoundPage } from "@/pages/NotFound";
 
 export default function RepairBrandPage() {
   const { categorySlug = "", brandSlug = "" } = useParams();
@@ -22,7 +23,7 @@ export default function RepairBrandPage() {
     return brand.models.filter((model) => model.name.toLowerCase().includes(normalized));
   }, [brand, query]);
 
-  if (!category || !brand) return null;
+  if (!category || !brand) return <NotFoundPage />;
 
   return (
     <div className="min-h-screen bg-white text-foreground">

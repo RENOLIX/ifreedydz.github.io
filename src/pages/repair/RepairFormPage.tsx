@@ -6,6 +6,7 @@ import Footer from "@/pages/_components/Footer";
 import { getBrand, getCategory, getModel } from "@/data/repair";
 import { getModelAsset } from "@/lib/repair-assets";
 import { siteContact } from "@/lib/site";
+import { NotFoundPage } from "@/pages/NotFound";
 
 export default function RepairFormPage() {
   const [searchParams] = useSearchParams();
@@ -32,7 +33,7 @@ export default function RepairFormPage() {
     message: string;
   } | null>(null);
 
-  if (!category || !brand || !model) return null;
+  if (!category || !brand || !model) return <NotFoundPage />;
 
   const selectedCategory = category;
   const selectedBrand = brand;

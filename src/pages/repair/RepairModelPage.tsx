@@ -38,6 +38,7 @@ import Footer from "@/pages/_components/Footer";
 import { getBrand, getCategory, getModel } from "@/data/repair";
 import { getModelAsset } from "@/lib/repair-assets";
 import { cn } from "@/lib/utils";
+import { NotFoundPage } from "@/pages/NotFound";
 
 const iconMap = {
   battery: Battery,
@@ -114,7 +115,7 @@ export default function RepairModelPage() {
     return category.issues.filter((issue) => selectedIssues.includes(issue.slug));
   }, [category, selectedIssues]);
 
-  if (!category || !brand || !model) return null;
+  if (!category || !brand || !model) return <NotFoundPage />;
   const currentCategory = category;
   const currentBrand = brand;
   const currentModel = model;
