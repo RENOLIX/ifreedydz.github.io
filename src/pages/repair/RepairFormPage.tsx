@@ -1,11 +1,16 @@
 import { useMemo, useState, type FormEvent } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { ChevronLeft, MapPin, Phone } from "lucide-react";
+import { ChevronLeft, Mail, MapPin, Phone } from "lucide-react";
 import Navbar from "@/pages/_components/Navbar";
 import Footer from "@/pages/_components/Footer";
-import { getBrand, getCategory, getModel } from "@/data/repair";
+import {
+  getAvailableIssues,
+  getBrand,
+  getCategory,
+  getModel,
+} from "@/data/repair";
 import { getModelAsset } from "@/lib/repair-assets";
-import { siteContact } from "@/lib/site";
+import { buildWhatsAppUrl, siteContact } from "@/lib/site";
 import { NotFoundPage } from "@/pages/NotFound";
 
 export default function RepairFormPage() {
@@ -21,11 +26,14 @@ export default function RepairFormPage() {
   const category = getCategory(categorySlug);
   const brand = getBrand(categorySlug, brandSlug);
   const model = getModel(categorySlug, brandSlug, modelSlug);
+  const availableIssues = useMemo(
+    () => getAvailableIssues(categorySlug, modelSlug),
+    [categorySlug, modelSlug],
+  );
 
   const issues = useMemo(() => {
-    if (!category) return [];
-    return category.issues.filter((issue) => issueSlugs.includes(issue.slug));
-  }, [category, issueSlugs]);
+    return availableIssues.filter((issue) => issueSlugs.includes(issue.slug));
+  }, [availableIssues, issueSlugs]);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formFeedback, setFormFeedback] = useState<{
@@ -40,65 +48,59 @@ export default function RepairFormPage() {
   const selectedModel = model;
   const summaryText = `Service: ${selectedCategory.name}\nMarque: ${selectedBrand.name}\nModele: ${selectedModel.name}\nPannes: ${issues.map((issue) => issue.label).join(", ")}`;
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
-    if (!siteContact.web3FormsAccessKey || siteContact.web3FormsAccessKey === "YOUR_WEB3FORMS_ACCESS_KEY") {
-      setFormFeedback({
-        type: "error",
-        message:
-          "Ajoutez d'abord votre cle Web3Forms dans src/lib/site.ts pour activer l'envoi.",
-      });
-      return;
-    }
 
     setIsSubmitting(true);
     setFormFeedback(null);
 
     const formData = new FormData(event.currentTarget);
-    formData.set("access_key", siteContact.web3FormsAccessKey);
-    formData.set("subject", `Nouvelle demande iFreedy - ${selectedModel.name}`);
-    formData.set("from_name", siteContact.storeName);
-    formData.set("replyto", String(formData.get("email") ?? ""));
-    formData.set("service", selectedCategory.name);
-    formData.set("marque", selectedBrand.name);
-    formData.set("modele", selectedModel.name);
-    formData.set("pannes", issues.map((issue) => issue.label).join(", "));
-    formData.set("resume", String(formData.get("resume") ?? summaryText));
-    formData.set("botcheck", "");
+    const firstName = String(formData.get("firstName") ?? "").trim();
+    const lastName = String(formData.get("lastName") ?? "").trim();
+    const phone = String(formData.get("phone") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim();
+    const resume = String(formData.get("resume") ?? summaryText).trim();
+    const message = String(formData.get("message") ?? "").trim();
+    const issueLabels = issues.map((issue) => issue.label).join(", ");
 
-    try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-        },
-        body: formData,
-      });
+    const whatsappMessage = [
+      `Bonjour ${siteContact.storeName},`,
+      "",
+      "Nouvelle demande de reparation:",
+      `Prenom: ${firstName}`,
+      `Nom: ${lastName}`,
+      `Telephone: ${phone}`,
+      `Email: ${email}`,
+      `Service: ${selectedCategory.name}`,
+      `Marque: ${selectedBrand.name}`,
+      `Modele: ${selectedModel.name}`,
+      `Pannes: ${issueLabels || "Non precisees"}`,
+      "",
+      "Resume:",
+      resume,
+      "",
+      "Message complementaire:",
+      message || "Aucun message complementaire.",
+    ].join("\n");
 
-      const payload = await response.json();
+    const whatsappUrl = buildWhatsAppUrl(whatsappMessage);
+    const whatsappWindow = window.open(
+      whatsappUrl,
+      "_blank",
+      "noopener,noreferrer",
+    );
 
-      if (!response.ok || !payload.success) {
-        throw new Error(payload.message || "Impossible d'envoyer votre demande.");
-      }
-
-      event.currentTarget.reset();
-      setFormFeedback({
-        type: "success",
-        message:
-          "Votre demande a bien ete envoyee. L'atelier iFreedy vous recontacte rapidement.",
-      });
-    } catch (error) {
-      setFormFeedback({
-        type: "error",
-        message:
-          error instanceof Error
-            ? error.message
-            : "Une erreur est survenue pendant l'envoi.",
-      });
-    } finally {
-      setIsSubmitting(false);
+    if (!whatsappWindow) {
+      window.location.href = whatsappUrl;
+      return;
     }
+
+    setFormFeedback({
+      type: "success",
+      message:
+        "Redirection vers WhatsApp effectuee. Envoyez le message pour finaliser votre demande.",
+    });
+    setIsSubmitting(false);
   }
 
   return (
@@ -164,9 +166,30 @@ export default function RepairFormPage() {
                   </div>
                   <div className="mt-3 flex items-start gap-3">
                     <Phone className="mt-0.5 h-4 w-4 text-foreground" />
-                    <p className="text-sm leading-7 text-muted-foreground">
-                      {siteContact.landline} / {siteContact.mobile}
-                    </p>
+                    <div className="text-sm leading-7 text-muted-foreground">
+                      <a
+                        href={`tel:${siteContact.landline}`}
+                        className="transition-colors hover:text-foreground"
+                      >
+                        {siteContact.landline}
+                      </a>
+                      {" / "}
+                      <a
+                        href={`tel:${siteContact.mobile}`}
+                        className="transition-colors hover:text-foreground"
+                      >
+                        {siteContact.mobile}
+                      </a>
+                    </div>
+                  </div>
+                  <div className="mt-3 flex items-start gap-3">
+                    <Mail className="mt-0.5 h-4 w-4 text-foreground" />
+                    <a
+                      href={`mailto:${siteContact.email}`}
+                      className="text-sm leading-7 text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {siteContact.email}
+                    </a>
                   </div>
                 </div>
               </div>
@@ -185,14 +208,24 @@ export default function RepairFormPage() {
                 </p>
 
                 <form onSubmit={handleSubmit} className="mt-10 grid gap-4 md:grid-cols-2">
-                  <input type="hidden" name="access_key" value={siteContact.web3FormsAccessKey} />
-                  <input type="hidden" name="botcheck" className="hidden" />
                   <div>
                     <label className="mb-2 block text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                      Nom complet
+                      Prenom
                     </label>
                     <input
-                      name="name"
+                      name="firstName"
+                      type="text"
+                      placeholder="Votre prenom"
+                      required
+                      className="w-full rounded-2xl bg-[#f5f5f7] px-4 py-3.5 text-sm outline-none focus:ring-2 focus:ring-foreground/15"
+                    />
+                  </div>
+                  <div>
+                    <label className="mb-2 block text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                      Nom
+                    </label>
+                    <input
+                      name="lastName"
                       type="text"
                       placeholder="Votre nom"
                       required
@@ -251,11 +284,11 @@ export default function RepairFormPage() {
                       disabled={isSubmitting}
                       className="w-full rounded-full bg-foreground px-6 py-3.5 text-sm font-semibold text-background transition-colors hover:bg-foreground/85 disabled:cursor-not-allowed disabled:opacity-60"
                     >
-                      {isSubmitting ? "Envoi en cours..." : "Envoyer la demande"}
+                      {isSubmitting ? "Ouverture..." : "Envoyer sur WhatsApp"}
                     </button>
                     <p className="mt-3 text-xs leading-6 text-muted-foreground">
-                      Formulaire connecte a Web3Forms. La cle d&apos;acces se modifie dans
-                      <span className="font-medium text-foreground"> src/lib/site.ts</span>.
+                      Le formulaire ouvre directement WhatsApp avec un message
+                      detaille pret a envoyer a l&apos;atelier.
                     </p>
                     {formFeedback ? (
                       <p

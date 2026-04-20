@@ -1,3 +1,4 @@
+import SocialLinks from "@/components/SocialLinks";
 import { siteContact } from "@/lib/site";
 
 const footerLinks = [
@@ -47,6 +48,9 @@ export default function Footer() {
               iFreedy accompagne vos appareils Apple avec une approche premium:
               reparations iPhone, iPad, MacBook et recuperation de donnees.
             </p>
+            <div className="mt-6">
+              <SocialLinks variant="dark" />
+            </div>
           </div>
 
           {footerLinks.map((column) => (

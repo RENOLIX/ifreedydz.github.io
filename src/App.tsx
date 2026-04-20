@@ -7,6 +7,7 @@ import RepairBrandPage from "./pages/repair/RepairBrandPage";
 import RepairModelPage from "./pages/repair/RepairModelPage";
 import RepairFormPage from "./pages/repair/RepairFormPage";
 import ScrollToTop from "./components/ScrollToTop";
+import WhatsAppFloat from "./components/WhatsAppFloat";
 
 export default function App() {
   const basename = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -14,6 +15,7 @@ export default function App() {
   return (
     <BrowserRouter basename={basename}>
       <ScrollToTop />
+      <WhatsAppFloat />
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/auth" element={<AuthPage />} />

@@ -1,12 +1,28 @@
 import { motion } from "motion/react";
 import { Mail, MapPin, Phone } from "lucide-react";
+import SocialLinks from "@/components/SocialLinks";
 import { siteContact } from "@/lib/site";
 
 const contactItems = [
-  { icon: Phone, label: "Mobile", value: siteContact.mobile },
-  { icon: Phone, label: "Fixe", value: siteContact.landline },
-  { icon: Mail, label: "Email", value: siteContact.email },
-  { icon: MapPin, label: "Adresse", value: siteContact.address },
+  {
+    icon: Phone,
+    label: "Mobile",
+    value: siteContact.mobile,
+    href: `tel:${siteContact.mobile}`,
+  },
+  {
+    icon: Phone,
+    label: "Fixe",
+    value: siteContact.landline,
+    href: `tel:${siteContact.landline}`,
+  },
+  {
+    icon: Mail,
+    label: "Email",
+    value: siteContact.email,
+    href: `mailto:${siteContact.email}`,
+  },
+  { icon: MapPin, label: "Adresse", value: siteContact.address, href: siteContact.mapsUrl },
 ];
 
 export default function ContactSection() {
@@ -42,16 +58,21 @@ export default function ContactSection() {
           <div className="grid gap-6 lg:grid-cols-[0.92fr_1.08fr]">
             <div className="flex flex-col gap-6">
               <div className="space-y-5 rounded-[28px] bg-[#f5f5f7] p-6">
-                {contactItems.map(({ icon: Icon, label, value }) => (
+                {contactItems.map(({ icon: Icon, label, value, href }) => (
                   <div key={label} className="flex items-start gap-4">
                     <Icon className="mt-0.5 h-5 w-5 text-foreground" />
                     <div>
                       <p className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
                         {label}
                       </p>
-                      <p className="mt-1 text-base font-medium leading-7 text-foreground">
+                      <a
+                        href={href}
+                        target={label === "Adresse" ? "_blank" : undefined}
+                        rel={label === "Adresse" ? "noreferrer" : undefined}
+                        className="mt-1 inline-block text-base font-medium leading-7 text-foreground transition-colors hover:text-foreground/70"
+                      >
                         {value}
-                      </p>
+                      </a>
                     </div>
                   </div>
                 ))}
@@ -90,6 +111,13 @@ export default function ContactSection() {
                   >
                     Ouvrir Maps
                   </a>
+                </div>
+
+                <div>
+                  <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                    Suivez iFreedy
+                  </p>
+                  <SocialLinks />
                 </div>
               </div>
             </div>

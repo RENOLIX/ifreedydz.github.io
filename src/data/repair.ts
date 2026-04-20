@@ -533,3 +533,14 @@ export function getModel(categorySlug: string, brandSlug: string, modelSlug: str
   return getBrand(categorySlug, brandSlug)?.models.find((model) => model.slug === modelSlug);
 }
 
+export function getAvailableIssues(categorySlug: string, modelSlug: string) {
+  const category = getCategory(categorySlug);
+  if (!category) return [];
+
+  if (category.slug === "mac" && (modelSlug === "imac" || modelSlug === "mac-pro")) {
+    return category.issues.filter((issue) => issue.slug !== "batterie");
+  }
+
+  return category.issues;
+}
+

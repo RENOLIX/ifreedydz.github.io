@@ -35,7 +35,12 @@ import {
 } from "lucide-react";
 import Navbar from "@/pages/_components/Navbar";
 import Footer from "@/pages/_components/Footer";
-import { getBrand, getCategory, getModel } from "@/data/repair";
+import {
+  getAvailableIssues,
+  getBrand,
+  getCategory,
+  getModel,
+} from "@/data/repair";
 import { getModelAsset } from "@/lib/repair-assets";
 import { cn } from "@/lib/utils";
 import { NotFoundPage } from "@/pages/NotFound";
@@ -109,11 +114,14 @@ export default function RepairModelPage() {
   const brand = getBrand(categorySlug, brandSlug);
   const model = getModel(categorySlug, brandSlug, modelSlug);
   const [selectedIssues, setSelectedIssues] = useState<string[]>([]);
+  const availableIssues = useMemo(
+    () => getAvailableIssues(categorySlug, modelSlug),
+    [categorySlug, modelSlug],
+  );
 
   const selectedIssueLabels = useMemo(() => {
-    if (!category) return [];
-    return category.issues.filter((issue) => selectedIssues.includes(issue.slug));
-  }, [category, selectedIssues]);
+    return availableIssues.filter((issue) => selectedIssues.includes(issue.slug));
+  }, [availableIssues, selectedIssues]);
 
   if (!category || !brand || !model) return <NotFoundPage />;
   const currentCategory = category;
@@ -199,7 +207,7 @@ export default function RepairModelPage() {
         <section className="px-6 pb-24">
           <div className="mx-auto max-w-[1120px]">
             <div className="grid grid-cols-2 gap-4 md:grid-cols-4 xl:grid-cols-5">
-              {currentCategory.issues.map((issue) => {
+              {availableIssues.map((issue) => {
                 const Icon = getIssueIcon(
                   issue.slug,
                   issue.icon as keyof typeof iconMap,
