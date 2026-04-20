@@ -94,7 +94,8 @@ export default function Footer() {
 
         <div className="flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 md:flex-row">
           <p className="text-xs text-white/40">
-            Copyright {year} iFreedy. Tous droits reserves.
+            Copyright {year} iFreedy. Tous droits reserves. Developed by
+            SITEMAGIQUE.
           </p>
           <div className="flex gap-5 text-xs text-white/40">
             <span className="cursor-pointer transition-colors hover:text-white/70">

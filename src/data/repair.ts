@@ -350,13 +350,13 @@ export const repairCategories: RepairCategory[] = [
     slug: "tablette",
     name: "Reparation tablette",
     title: "Quelle tablette souhaitez-vous faire reparer ?",
-    heroImage: "https://support.apple.com/en-us/122240",
+    heroImage: "https://support.apple.com/en-us/119892",
     issues: tabletIssues,
     brands: [
       {
         slug: "apple",
         name: "Apple",
-        image: "https://support.apple.com/en-us/122240",
+        image: "https://support.apple.com/en-us/119892",
         models: appleTabletModels,
       },
       {
@@ -420,7 +420,7 @@ export const repairCategories: RepairCategory[] = [
     slug: "ordinateur",
     name: "Reparation ordinateur",
     title: "Quel ordinateur souhaitez-vous faire reparer ?",
-    heroImage: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/xps-notebooks/xps-13-9350/pdp/platinum/laptop-xps-13-9350-pdp-module4.psd?fmt=png-alpha&wid=5000&hei=3000",
+    heroImage: "https://hp.widen.net/content/kc34yqpc9l/webp/kc34yqpc9l.png",
     issues: computerIssues,
     brands: [
       {
@@ -440,9 +440,9 @@ export const repairCategories: RepairCategory[] = [
         image: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/xps-notebooks/xps-13-9350/pdp/platinum/laptop-xps-13-9350-pdp-module4.psd?fmt=png-alpha&wid=5000&hei=3000",
         models: [
           { slug: "xps-13", name: "Dell XPS 13", image: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/xps-notebooks/xps-13-9350/pdp/platinum/laptop-xps-13-9350-pdp-module4.psd?fmt=png-alpha&wid=5000&hei=3000" },
-          { slug: "xps-15", name: "Dell XPS 15", image: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/xps-notebooks/xps-13-9350/pdp/platinum/laptop-xps-13-9350-pl-pdp-module1.psd?fmt=jpg&wid=5000&hei=2500" },
-          { slug: "latitude-7440", name: "Dell Latitude 7440", image: "https://i.dell.com/sites/csimages/Video_Imagery/all/xps-9350-silver-thumb.png" },
-          { slug: "g15", name: "Dell G15", image: "https://i.dell.com/sites/csimages/Video_Imagery/all/xps-9350-silver-thumb.png" },
+          { slug: "xps-15", name: "Dell XPS 15", image: "https://www.dell.com/en-us/shop/dell-laptops/xps-15-laptop/spd/xps-15-9530-laptop/usexchbts9530gdbp" },
+          { slug: "latitude-7440", name: "Dell Latitude 7440", image: "https://www.dell.com/en-us/shop/laptops/14-7440/spd/latitude-14-7440-2-in-1-laptop/s013l7440usvp" },
+          { slug: "g15", name: "Dell G15", image: "https://www.dell.com/en-us/shop/gaming-laptops/g15-gaming-laptop/spd/g-series-15-5530-laptop/useghbts5530gnrt" },
         ],
       },
       {
@@ -475,7 +475,7 @@ export const repairCategories: RepairCategory[] = [
           { slug: "swift-5", name: "Acer Swift 5", image: "https://images.acer.com/is/image/acer/Swift%20Go%2014%20AI-3?$Series-Component-XL$" },
           { slug: "aspire-5", name: "Acer Aspire 5", image: "https://images.acer.com/is/image/acer/Acer-Aspire-14-AI?$Series-Component-XL$" },
           { slug: "nitro-5", name: "Acer Nitro 5", image: "https://images.acer.com/is/image/acer/Nitro-V-16-AI-Picanto_PTZ?$Series-Component-XL$" },
-          { slug: "predator-helios-16", name: "Predator Helios 16", image: "https://images.acer.com/is/image/acer/predator-helios-16-ai-emira-arx-banner:Secondary-Hero-XL" },
+          { slug: "predator-helios-16", name: "Predator Helios 16", image: "https://www.acer.com/us-en/predator/laptops/helios/helios-16-ai/" },
         ],
       },
     ],
@@ -484,13 +484,13 @@ export const repairCategories: RepairCategory[] = [
     slug: "mac",
     name: "Reparation Mac",
     title: "Quel Mac souhaitez-vous faire reparer ?",
-    heroImage: "https://support.apple.com/en-lamr/122210",
+    heroImage: "https://support.apple.com/en-lamr/121552",
     issues: macIssues,
     brands: [
       {
         slug: "apple",
         name: "Apple",
-        image: "https://support.apple.com/en-lamr/122210",
+        image: "https://support.apple.com/en-lamr/121552",
         models: macModels,
       },
     ],

@@ -156,7 +156,7 @@ async function ensureDirectory(filePath) {
 
 async function createPosterAsset(buffer, outputPath) {
   const prepared = sharp(buffer, { animated: false })
-    .flatten({ background: "#ffffff" })
+    .ensureAlpha()
     .trim({ threshold: 8 });
 
   const sourceMeta = await prepared.metadata();
@@ -202,7 +202,7 @@ async function createPosterAsset(buffer, outputPath) {
       width: 1080,
       height: 1350,
       channels: 4,
-      background: "#f6f6f8",
+      background: { r: 0, g: 0, b: 0, alpha: 0 },
     },
   })
     .composite([
@@ -287,16 +287,22 @@ async function main() {
   }
 
   for (const job of jobs) {
-    const best = await pickBestImage(job.url);
-    if (job.mode === "background") {
-      await createBackgroundAsset(best.buffer, job.outputPath, job.width, job.height);
-    } else {
-      await createPosterAsset(best.buffer, job.outputPath);
-    }
+    try {
+      const best = await pickBestImage(job.url);
+      if (job.mode === "background") {
+        await createBackgroundAsset(best.buffer, job.outputPath, job.width, job.height);
+      } else {
+        await createPosterAsset(best.buffer, job.outputPath);
+      }
 
-    console.log(
-      `${job.label} -> ${path.relative(root, job.outputPath)} (${best.width}x${best.height} from ${best.url})`,
-    );
+      console.log(
+        `${job.label} -> ${path.relative(root, job.outputPath)} (${best.width}x${best.height} from ${best.url})`,
+      );
+    } catch (error) {
+      console.warn(
+        `${job.label} skipped (${job.url}): ${error instanceof Error ? error.message : String(error)}`,
+      );
+    }
   }
 }
 
