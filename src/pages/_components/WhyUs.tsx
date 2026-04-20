@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { Award, HeadphonesIcon, ShieldCheck, Zap } from "lucide-react";
+import { withSiteBase } from "@/lib/routing";
 
 const reasons = [
   {
@@ -31,7 +32,7 @@ const reasons = [
 const figures = [
   { value: "10 000+", label: "appareils pris en charge" },
   { value: "24h", label: "delai moyen atelier" },
-  { value: "6 mois", label: "garantie sur reparations" },
+  { value: "6 mois", label: "garantie sur certain produit" },
 ];
 
 export default function WhyUs() {
@@ -144,7 +145,7 @@ export default function WhyUs() {
             className="relative h-72 border-t border-border/70 md:h-96"
           >
             <img
-              src={`${import.meta.env.BASE_URL}images/atelier/atelier-ifreedy.jpeg`}
+              src={withSiteBase("images/atelier/atelier-ifreedy.jpeg")}
               alt="Atelier iFreedy"
               className="h-full w-full object-cover"
             />

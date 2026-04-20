@@ -8,9 +8,10 @@ import RepairModelPage from "./pages/repair/RepairModelPage";
 import RepairFormPage from "./pages/repair/RepairFormPage";
 import ScrollToTop from "./components/ScrollToTop";
 import WhatsAppFloat from "./components/WhatsAppFloat";
+import { getRouterBasename } from "./lib/routing";
 
 export default function App() {
-  const basename = import.meta.env.BASE_URL.replace(/\/$/, "");
+  const basename = getRouterBasename();
 
   return (
     <BrowserRouter basename={basename}>

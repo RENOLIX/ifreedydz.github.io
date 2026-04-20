@@ -9,6 +9,15 @@
     />
     <title>iFreedy</title>
     <script>
+      (function () {
+        var base = document.createElement("base");
+        base.href = window.location.hostname.endsWith("github.io")
+          ? "/ifreedydz.github.io/"
+          : "/";
+        document.head.appendChild(base);
+      })();
+    </script>
+    <script>
       (function (l) {
         if (l.search[1] === "/") {
           const basePath = l.pathname.endsWith("/")

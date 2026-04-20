@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Menu, X } from "lucide-react";
+import { withSiteBase } from "@/lib/routing";
 
 const brandLogo =
   "https://i.ibb.co/nMN7s0zm/Whats-App-Image-2026-04-16-at-18-45-45.png";
@@ -8,7 +9,7 @@ const brandLogo =
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const homeBase = import.meta.env.BASE_URL || "/";
+  const homeBase = withSiteBase();
   const links = [
     { label: "Services", href: `${homeBase}#services` },
     { label: "Pourquoi nous", href: `${homeBase}#pourquoi` },

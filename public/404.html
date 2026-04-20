@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <title>iFreedy</title>
     <script>
-      const pathSegmentsToKeep = 1;
+      const pathSegmentsToKeep = window.location.hostname.endsWith("github.io")
+        ? 1
+        : 0;
       const { location } = window;
       const redirectUrl =
         location.protocol +

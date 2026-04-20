@@ -1,15 +1,33 @@
 import SocialLinks from "@/components/SocialLinks";
+import { withSiteBase } from "@/lib/routing";
 import { siteContact } from "@/lib/site";
+
+type FooterLink = string | { label: string; href: string };
 
 const footerLinks = [
   {
     title: "Services",
     links: [
-      "Reparation iPhone",
-      "Reparation MacBook",
-      "Reparation iPad",
-      "Recuperation de donnees",
-      "Degat des eaux",
+      {
+        label: "Reparation iPhone",
+        href: withSiteBase("reparation/telephone/apple"),
+      },
+      {
+        label: "Reparation MacBook",
+        href: withSiteBase("reparation/mac/apple/macbook-pro"),
+      },
+      {
+        label: "Reparation iPad",
+        href: withSiteBase("reparation/tablette/apple"),
+      },
+      {
+        label: "Recuperation de donnees",
+        href: `${withSiteBase()}#pourquoi`,
+      },
+      {
+        label: "Degat des eaux",
+        href: `${withSiteBase()}#carte-mere`,
+      },
     ],
   },
   {
@@ -45,8 +63,11 @@ export default function Footer() {
               <span className="text-[17px] font-semibold">iFreedy</span>
             </div>
             <p className="text-xs leading-relaxed text-white/50">
-              iFreedy accompagne vos appareils Apple avec une approche premium:
-              reparations iPhone, iPad, MacBook et recuperation de donnees.
+              Maintenance et reparation specialises pour appareils Apple
+              (iPhone, iPad, MacBook) : diagnostic avance, reparation
+              materielle, maintenance logicielle et recuperation de donnees.
+              Avec 18 ans d'experience, nous maitrisons les interventions
+              complexes en respectant les standards de qualite et de securite.
             </p>
             <div className="mt-6">
               <SocialLinks variant="dark" />
@@ -59,9 +80,16 @@ export default function Footer() {
                 {column.title}
               </h4>
               <ul className="space-y-2.5">
-                {column.links.map((link) => (
-                  <li key={link}>
-                    {link === "Voir notre emplacement" ? (
+                {column.links.map((link: FooterLink) => (
+                  <li key={typeof link === "object" ? link.label : link}>
+                    {typeof link === "object" ? (
+                      <a
+                        href={link.href}
+                        className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white"
+                      >
+                        {link.label}
+                      </a>
+                    ) : link === "Voir notre emplacement" ? (
                       <a
                         href={siteContact.mapsUrl}
                         target="_blank"

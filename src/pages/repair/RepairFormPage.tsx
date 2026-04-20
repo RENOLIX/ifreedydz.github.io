@@ -252,7 +252,6 @@ export default function RepairFormPage() {
                       name="email"
                       type="email"
                       placeholder="Votre email"
-                      required
                       className="w-full rounded-2xl bg-[#f5f5f7] px-4 py-3.5 text-sm outline-none focus:ring-2 focus:ring-foreground/15"
                     />
                   </div>
