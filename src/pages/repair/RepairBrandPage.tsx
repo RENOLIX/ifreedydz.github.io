@@ -11,6 +11,9 @@ export default function RepairBrandPage() {
   const category = getCategory(categorySlug);
   const brand = getBrand(categorySlug, brandSlug);
   const [query, setQuery] = useState("");
+  const isComputerCategory = categorySlug === "ordinateur";
+  const choiceLabel = isComputerCategory ? "famille" : "modele";
+  const searchLabel = isComputerCategory ? "famille" : "modele";
 
   const models = useMemo(() => {
     if (!brand) return [];
@@ -51,11 +54,12 @@ export default function RepairBrandPage() {
                   {category.name}
                 </p>
                 <h1 className="text-4xl font-semibold tracking-tight md:text-6xl">
-                  Choisissez votre modele {brand.name}.
+                  Choisissez votre {choiceLabel} {brand.name}.
                 </h1>
                 <p className="mt-4 max-w-2xl text-base leading-8 text-muted-foreground md:text-lg">
-                  Selectionnez le modele exact de votre appareil pour continuer
-                  vers le choix des pannes puis le formulaire de prise en charge.
+                  Selectionnez la {choiceLabel} adaptee a votre appareil pour
+                  continuer vers le choix des pannes puis le formulaire de prise
+                  en charge.
                 </p>
 
                 <div className="relative mt-8 max-w-xl">
@@ -63,7 +67,7 @@ export default function RepairBrandPage() {
                   <input
                     value={query}
                     onChange={(event) => setQuery(event.target.value)}
-                    placeholder="Recherchez votre modele"
+                    placeholder={`Recherchez votre ${searchLabel}`}
                     className="w-full rounded-full border border-border bg-[#f5f5f7] py-3 pl-11 pr-4 text-sm outline-none transition-colors focus:border-foreground/20"
                   />
                 </div>

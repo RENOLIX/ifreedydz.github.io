@@ -63,7 +63,7 @@ export default function MotherboardSection() {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,0,0,0.04),transparent_30%)]" />
             <div className="relative flex h-full flex-col items-center justify-center gap-6 text-center">
               <img
-                src="https://i.ibb.co/HLzZxbVT/etiquette-icone-carte-mere-png-fond-transparent-53876-958103.png"
+                src="https://i.ibb.co/1frgk9xs/Chat-GPT-Image-20-avr-2026-01-26-12.png"
                 alt="Carte mere Apple"
                 className="h-auto w-full max-w-[260px] object-contain"
               />

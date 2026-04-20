@@ -202,6 +202,11 @@ const macModels: RepairModel[] = [
 
 const playstationModels: RepairModel[] = [
   {
+    slug: "ps3",
+    name: "PlayStation 3",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/PS3-Slim-Console-Vert.jpg",
+  },
+  {
     slug: "ps4",
     name: "PlayStation 4",
     image:
@@ -428,10 +433,9 @@ export const repairCategories: RepairCategory[] = [
         name: "HP",
         image: "https://hp.widen.net/content/kc34yqpc9l/webp/kc34yqpc9l.png",
         models: [
-          { slug: "spectre-x360", name: "HP Spectre x360", image: "https://hp.widen.net/content/kc34yqpc9l/webp/kc34yqpc9l.png" },
-          { slug: "envy-15", name: "HP Envy 15", image: "https://hp.widen.net/content/mqcdbv52f0/webp/mqcdbv52f0.png" },
-          { slug: "omen-16", name: "HP Omen 16", image: "https://hp.widen.net/content/wf0n7o2bmd/webp/wf0n7o2bmd.png" },
-          { slug: "probook-450", name: "HP ProBook 450", image: "https://hp.widen.net/content/yj0jvnsres/webp/yj0jvnsres.png" },
+          { slug: "spectre-x360", name: "HP EliteBook", image: "https://hp.widen.net/content/kc34yqpc9l/webp/kc34yqpc9l.png" },
+          { slug: "probook-450", name: "HP ProBook", image: "https://hp.widen.net/content/yj0jvnsres/webp/yj0jvnsres.png" },
+          { slug: "omen-16", name: "HP Omen", image: "https://hp.widen.net/content/wf0n7o2bmd/webp/wf0n7o2bmd.png" },
         ],
       },
       {
@@ -439,10 +443,9 @@ export const repairCategories: RepairCategory[] = [
         name: "Dell",
         image: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/xps-notebooks/xps-13-9350/pdp/platinum/laptop-xps-13-9350-pdp-module4.psd?fmt=png-alpha&wid=5000&hei=3000",
         models: [
-          { slug: "xps-13", name: "Dell XPS 13", image: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/xps-notebooks/xps-13-9350/pdp/platinum/laptop-xps-13-9350-pdp-module4.psd?fmt=png-alpha&wid=5000&hei=3000" },
-          { slug: "xps-15", name: "Dell XPS 15", image: "https://www.dell.com/en-us/shop/dell-laptops/xps-15-laptop/spd/xps-15-9530-laptop/usexchbts9530gdbp" },
-          { slug: "latitude-7440", name: "Dell Latitude 7440", image: "https://www.dell.com/en-us/shop/laptops/14-7440/spd/latitude-14-7440-2-in-1-laptop/s013l7440usvp" },
-          { slug: "g15", name: "Dell G15", image: "https://www.dell.com/en-us/shop/gaming-laptops/g15-gaming-laptop/spd/g-series-15-5530-laptop/useghbts5530gnrt" },
+          { slug: "xps-13", name: "Dell XPS", image: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/xps-notebooks/xps-13-9350/pdp/platinum/laptop-xps-13-9350-pdp-module4.psd?fmt=png-alpha&wid=5000&hei=3000" },
+          { slug: "latitude-7440", name: "Dell Latitude", image: "https://www.dell.com/en-us/shop/laptops/14-7440/spd/latitude-14-7440-2-in-1-laptop/s013l7440usvp" },
+          { slug: "g15", name: "Dell G Series", image: "https://www.dell.com/en-us/shop/gaming-laptops/g15-gaming-laptop/spd/g-series-15-5530-laptop/useghbts5530gnrt" },
         ],
       },
       {
@@ -450,10 +453,9 @@ export const repairCategories: RepairCategory[] = [
         name: "Lenovo",
         image: "https://p4-ofp.static.pub/ShareResource/na/products/thinkpad/560x450/lenovo-thinkpad-x1-carbon-g12-01.png",
         models: [
-          { slug: "thinkpad-x1-carbon", name: "ThinkPad X1 Carbon", image: "https://p4-ofp.static.pub/ShareResource/na/products/thinkpad/560x450/lenovo-thinkpad-x1-carbon-g12-01.png" },
-          { slug: "yoga-9i", name: "Lenovo Yoga 9i", image: "https://p2-ofp.static.pub/ShareResource/na/products/thinkpad/560x450/lenovo-thinkpad-x1-carbon-g12.png" },
-          { slug: "legion-5", name: "Lenovo Legion 5", image: "https://p3-ofp.static.pub/ShareResource/na/products/thinkpad/560x450/lenovo-thinkpad-x1-carbon-g12-03.png" },
-          { slug: "ideapad-5", name: "Lenovo IdeaPad 5", image: "https://p2-ofp.static.pub/ShareResource/na/products/thinkpad/560x450/lenovo-thinkpad-x1-carbon-g12-04.png" },
+          { slug: "thinkpad-x1-carbon", name: "Lenovo ThinkPad", image: "https://p4-ofp.static.pub/ShareResource/na/products/thinkpad/560x450/lenovo-thinkpad-x1-carbon-g12-01.png" },
+          { slug: "yoga-9i", name: "Lenovo Yoga", image: "https://p2-ofp.static.pub/ShareResource/na/products/thinkpad/560x450/lenovo-thinkpad-x1-carbon-g12.png" },
+          { slug: "legion-5", name: "Lenovo Legion", image: "https://p3-ofp.static.pub/ShareResource/na/products/thinkpad/560x450/lenovo-thinkpad-x1-carbon-g12-03.png" },
         ],
       },
       {
@@ -461,10 +463,9 @@ export const repairCategories: RepairCategory[] = [
         name: "Asus",
         image: "https://dlcdnwebimgs.asus.com/gain/282fa6b1-5d9e-4950-ab46-1da2defbe6a3/",
         models: [
-          { slug: "zenbook-14", name: "Asus Zenbook 14", image: "https://press.asus.com/assets/w_1200,h_630/7395f95a-f24d-4def-83db-f2c612876ceb/Zenbook%2014%20OLED_UX3405_Scenario%20photo_03.JPG" },
-          { slug: "rog-zephyrus-g14", name: "ROG Zephyrus G14", image: "https://dlcdnwebimgs.asus.com/gain/282fa6b1-5d9e-4950-ab46-1da2defbe6a3/" },
-          { slug: "vivobook-15", name: "Asus VivoBook 15", image: "https://www.asus.com/media/Odin/Websites/us/ProductLine/20240409023703.png" },
-          { slug: "tuf-a15", name: "Asus TUF A15", image: "https://www.asus.com/media/Odin/Websites/us/ProductLine/20240123121818.png" },
+          { slug: "zenbook-14", name: "Asus Zenbook", image: "https://press.asus.com/assets/w_1200,h_630/7395f95a-f24d-4def-83db-f2c612876ceb/Zenbook%2014%20OLED_UX3405_Scenario%20photo_03.JPG" },
+          { slug: "vivobook-15", name: "Asus VivoBook", image: "https://www.asus.com/media/Odin/Websites/us/ProductLine/20240409023703.png" },
+          { slug: "rog-zephyrus-g14", name: "Asus ROG", image: "https://dlcdnwebimgs.asus.com/gain/282fa6b1-5d9e-4950-ab46-1da2defbe6a3/" },
         ],
       },
       {
@@ -472,10 +473,9 @@ export const repairCategories: RepairCategory[] = [
         name: "Acer",
         image: "https://images.acer.com/is/image/acer/Swift%20Go%2014%20AI-3?$Series-Component-XL$",
         models: [
-          { slug: "swift-5", name: "Acer Swift 5", image: "https://images.acer.com/is/image/acer/Swift%20Go%2014%20AI-3?$Series-Component-XL$" },
-          { slug: "aspire-5", name: "Acer Aspire 5", image: "https://images.acer.com/is/image/acer/Acer-Aspire-14-AI?$Series-Component-XL$" },
-          { slug: "nitro-5", name: "Acer Nitro 5", image: "https://images.acer.com/is/image/acer/Nitro-V-16-AI-Picanto_PTZ?$Series-Component-XL$" },
-          { slug: "predator-helios-16", name: "Predator Helios 16", image: "https://www.acer.com/us-en/predator/laptops/helios/helios-16-ai/" },
+          { slug: "swift-5", name: "Acer Swift", image: "https://images.acer.com/is/image/acer/Swift%20Go%2014%20AI-3?$Series-Component-XL$" },
+          { slug: "aspire-5", name: "Acer Aspire", image: "https://images.acer.com/is/image/acer/Acer-Aspire-14-AI?$Series-Component-XL$" },
+          { slug: "predator-helios-16", name: "Acer Predator", image: "https://www.acer.com/us-en/predator/laptops/helios/helios-16-ai/" },
         ],
       },
     ],
