@@ -45,7 +45,7 @@ const footerLinks = [
       "Voir notre emplacement",
       siteContact.mobile,
       siteContact.landline,
-      siteContact.email,
+      { label: siteContact.emailLabel, href: `mailto:${siteContact.email}` },
       "Entreprise iFreedy",
     ],
   },
@@ -94,13 +94,6 @@ export default function Footer() {
                         href={siteContact.mapsUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white"
-                      >
-                        {link}
-                      </a>
-                    ) : link === siteContact.email ? (
-                      <a
-                        href={`mailto:${siteContact.email}`}
                         className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white"
                       >
                         {link}

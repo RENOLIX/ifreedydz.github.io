@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ifreedy.com/sitemap.xml
+Host: ifreedy.com

@@ -1,6 +1,8 @@
 export const siteContact = {
   storeName: "iFreedy",
-  email: "contact@ifreedy.com",
+  email: "ifreedy@hotmail.com",
+  emailLabel: "Nous contacter par email",
+  siteUrl: "https://ifreedy.com",
   mobile: "0554365512",
   landline: "028099148",
   whatsapp: "213554365512",

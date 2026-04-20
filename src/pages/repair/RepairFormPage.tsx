@@ -70,7 +70,7 @@ export default function RepairFormPage() {
       `Prenom: ${firstName}`,
       `Nom: ${lastName}`,
       `Telephone: ${phone}`,
-      `Email: ${email}`,
+      `Email: ${email || "Non renseigne"}`,
       `Service: ${selectedCategory.name}`,
       `Marque: ${selectedBrand.name}`,
       `Modele: ${selectedModel.name}`,
@@ -188,7 +188,7 @@ export default function RepairFormPage() {
                       href={`mailto:${siteContact.email}`}
                       className="text-sm leading-7 text-muted-foreground transition-colors hover:text-foreground"
                     >
-                      {siteContact.email}
+                      {siteContact.emailLabel}
                     </a>
                   </div>
                 </div>

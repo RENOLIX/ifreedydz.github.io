@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { MapPin, Phone } from "lucide-react";
 import SocialLinks from "@/components/SocialLinks";
 import { siteContact } from "@/lib/site";
 
@@ -15,12 +15,6 @@ const contactItems = [
     label: "Fixe",
     value: siteContact.landline,
     href: `tel:${siteContact.landline}`,
-  },
-  {
-    icon: Mail,
-    label: "Email",
-    value: siteContact.email,
-    href: `mailto:${siteContact.email}`,
   },
   { icon: MapPin, label: "Adresse", value: siteContact.address, href: siteContact.mapsUrl },
 ];
@@ -101,7 +95,7 @@ export default function ContactSection() {
                     href={`mailto:${siteContact.email}`}
                     className="inline-flex items-center justify-center rounded-full border border-border bg-white px-5 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-white/70"
                   >
-                    Envoyer un email
+                    {siteContact.emailLabel}
                   </a>
                   <a
                     href={siteContact.mapsUrl}
