@@ -3,22 +3,19 @@ import { Star } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Sophie M.",
-    role: "iPhone 15 Pro",
+    name: "Aimir Maouche",
     quote:
-      "Ecran remplace dans la journee, accueil tres propre et explications claires. Le site donne exactement l'image de la boutique.",
+      "J'ai fais 800 km pour venir jusqu'ici depuis Tebessa il a pu regler mon probleme en seulement 30 minutes. L'equipe est professionnelle et tres sympathique encore merci a Nabil pour son travail !!!",
   },
   {
-    name: "Karim B.",
-    role: "MacBook Pro",
+    name: "Yasmine",
     quote:
-      "Ils ont recupere mes donnees alors que mon Mac ne demarrait plus. Travail serieux, rapide et tres rassurant.",
+      "Je recommande a mille pour cent, son professionnalisme m'a reellement impressionnee : diagnostic clair, explications precises et travail soigne du debut a la fin. Il respecte les delais annonces, tient ses engagements et reste disponible en cas de questions. C'est rare de trouver quelqu'un de serieux, fiable et aussi competent. Je le recommande vivement a toute personne qui cherche un reparateur de confiance.",
   },
   {
-    name: "Claire D.",
-    role: "iPad Air",
+    name: "Fahed Berghiche",
     quote:
-      "Prise en charge fluide, devis rapide et resultat nickel. On sent un vrai positionnement premium du debut a la fin.",
+      "Personne tres honnete et professionnelle. Alors que d'autres demandaient des prix exorbitants pour la reparation de mon telephone, ici tout a ete fait en une heure, avec un prix imbattable. Travail rapide, efficace et transparent. Je recommande vivement.",
   },
 ];
 
@@ -70,9 +67,6 @@ export default function Testimonials() {
               <div className="mt-6 border-t border-border pt-4">
                 <p className="text-sm font-semibold text-foreground">
                   {item.name}
-                </p>
-                <p className="text-xs uppercase tracking-wide text-muted-foreground">
-                  {item.role}
                 </p>
               </div>
             </motion.article>
