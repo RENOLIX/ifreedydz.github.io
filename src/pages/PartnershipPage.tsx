@@ -1,8 +1,6 @@
 import { type FormEvent, useMemo, useState } from "react";
 import { motion } from "motion/react";
 import {
-  Archive,
-  ArrowRight,
   BadgePercent,
   Building2,
   CheckCircle2,
@@ -25,7 +23,6 @@ import Navbar from "@/pages/_components/Navbar";
 import Footer from "@/pages/_components/Footer";
 import SocialLinks from "@/components/SocialLinks";
 import { siteContact } from "@/lib/site";
-import { withSiteBase } from "@/lib/routing";
 
 type FeedbackState = {
   type: "success" | "error";
@@ -84,25 +81,6 @@ const repairScopes = [
   "PC portables et fixes",
   "Objets connectes et accessoires",
   "Reprises, transferts et renouvellement de parc",
-];
-
-const serviceLinks = [
-  { label: "Reparation Apple", href: withSiteBase("reparation/telephone/apple") },
-  { label: "Reparation Samsung", href: withSiteBase("reparation/telephone/samsung") },
-  { label: "Reparation Huawei", href: withSiteBase("reparation/telephone/huawei") },
-  { label: "Autres marques", href: withSiteBase("reparation/telephone") },
-  { label: "Reparation ordinateurs", href: withSiteBase("reparation/ordinateur") },
-  { label: "Espace pro", href: withSiteBase("partenariat") },
-  { label: "Trouver une boutique", href: siteContact.mapsUrl },
-];
-
-const infoLinks = [
-  { label: "Home", href: withSiteBase() },
-  { label: "FAQ", href: `${withSiteBase()}#avis` },
-  { label: "Rendez-vous", href: `${withSiteBase()}#contact` },
-  { label: "Service coursier", href: "#avantages" },
-  { label: "Partenariat", href: withSiteBase("partenariat") },
-  { label: "CGV", href: `${withSiteBase()}#contact` },
 ];
 
 function isWeb3FormsConfigured() {
@@ -805,80 +783,6 @@ export default function PartnershipPage() {
             </div>
 
             <div className="grid gap-6">
-              <div className="rounded-[34px] border border-border/70 bg-white p-8 shadow-[0_22px_70px_rgba(15,23,42,0.06)]">
-                <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
-                  Liens
-                </p>
-                <h2 className="mt-4 text-3xl font-semibold tracking-tight">
-                  Voici quelques liens interessants pour vous.
-                </h2>
-                <div className="mt-8 grid gap-8 md:grid-cols-3">
-                  <div>
-                    <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                      Services
-                    </h3>
-                    <ul className="mt-4 space-y-3 text-sm text-foreground">
-                      {serviceLinks.map((link) => (
-                        <li key={link.label}>
-                          <a
-                            href={link.href}
-                            target={
-                              link.href.startsWith("http") ? "_blank" : undefined
-                            }
-                            rel={
-                              link.href.startsWith("http")
-                                ? "noreferrer"
-                                : undefined
-                            }
-                            className="inline-flex items-center gap-2 transition-colors hover:text-foreground/65"
-                          >
-                            <ArrowRight className="h-3.5 w-3.5" />
-                            {link.label}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                      Informations
-                    </h3>
-                    <ul className="mt-4 space-y-3 text-sm text-foreground">
-                      {infoLinks.map((link) => (
-                        <li key={link.label}>
-                          <a
-                            href={link.href}
-                            className="inline-flex items-center gap-2 transition-colors hover:text-foreground/65"
-                          >
-                            <ArrowRight className="h-3.5 w-3.5" />
-                            {link.label}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                      Archive
-                    </h3>
-                    <div className="mt-4 rounded-[24px] bg-[#f5f5f7] p-4">
-                      <div className="flex items-center gap-3">
-                        <Archive className="h-4 w-4 text-foreground" />
-                        <p className="text-sm font-medium text-foreground">
-                          decembre 2015
-                        </p>
-                      </div>
-                      <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                        Une base d'experience qui nourrit notre exigence atelier
-                        et notre accompagnement pro.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
               <div className="rounded-[34px] border border-border/70 bg-white p-8 shadow-[0_22px_70px_rgba(15,23,42,0.06)]">
                 <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
                   <div>
