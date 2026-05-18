@@ -6,6 +6,7 @@ import RepairCategoryPage from "./pages/repair/RepairCategoryPage";
 import RepairBrandPage from "./pages/repair/RepairBrandPage";
 import RepairModelPage from "./pages/repair/RepairModelPage";
 import RepairFormPage from "./pages/repair/RepairFormPage";
+import PartnershipPage from "./pages/PartnershipPage";
 import ScrollToTop from "./components/ScrollToTop";
 import WhatsAppFloat from "./components/WhatsAppFloat";
 import { getRouterBasename } from "./lib/routing";
@@ -20,6 +21,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/auth" element={<AuthPage />} />
+        <Route path="/partenariat" element={<PartnershipPage />} />
         <Route path="/reparation" element={<Navigate to="/" replace />} />
         <Route path="/reparation/formulaire" element={<RepairFormPage />} />
         <Route path="/reparation/:categorySlug" element={<RepairCategoryPage />} />

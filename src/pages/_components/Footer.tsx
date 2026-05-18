@@ -33,6 +33,8 @@ const footerLinks = [
   {
     title: "Infos pratiques",
     links: [
+      { label: "Home", href: withSiteBase() },
+      { label: "Partenariat", href: withSiteBase("partenariat") },
       "Nos garanties",
       "Delais de reparation",
       "Devis gratuit",

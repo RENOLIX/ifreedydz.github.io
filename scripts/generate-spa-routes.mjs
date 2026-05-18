@@ -52,7 +52,12 @@ async function main() {
     loadRepairCategories(),
   ]);
 
-  const routes = new Set(["auth", "reparation", "reparation/formulaire"]);
+  const routes = new Set([
+    "auth",
+    "partenariat",
+    "reparation",
+    "reparation/formulaire",
+  ]);
 
   for (const category of categories) {
     routes.add(`reparation/${category.slug}`);

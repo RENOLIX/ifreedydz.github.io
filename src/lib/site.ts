@@ -3,6 +3,7 @@ export const siteContact = {
   email: "ifreedy@hotmail.com",
   emailLabel: "Nous contacter par email",
   siteUrl: "https://ifreedy.com",
+  web3formsAccessKey: "5a3f659d-4fb3-4f4f-be59-33369a7d9fa5",
   mobile: "0554365512",
   landline: "028099148",
   whatsapp: "213554365512",

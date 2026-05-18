@@ -10,10 +10,12 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const homeBase = withSiteBase();
+  const partnershipBase = withSiteBase("partenariat");
   const links = [
     { label: "Services", href: `${homeBase}#services` },
     { label: "Pourquoi nous", href: `${homeBase}#pourquoi` },
     { label: "Avis", href: `${homeBase}#avis` },
+    { label: "Partenariat", href: partnershipBase },
     { label: "Contact", href: `${homeBase}#contact` },
   ];
 
