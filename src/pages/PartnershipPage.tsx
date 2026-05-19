@@ -22,6 +22,7 @@ import {
 import Navbar from "@/pages/_components/Navbar";
 import Footer from "@/pages/_components/Footer";
 import SocialLinks from "@/components/SocialLinks";
+import { withSiteBase } from "@/lib/routing";
 import { siteContact } from "@/lib/site";
 
 type FeedbackState = {
@@ -65,12 +66,6 @@ const advantages = [
     title: "Ligne dediee Partenariat",
     description:
       "Un contact direct pour vos devis, vos suivis de flotte et vos besoins urgents au quotidien.",
-  },
-  {
-    icon: Users,
-    title: "Pour toutes les tailles d'entreprise",
-    description:
-      "Independants, PME, groupes, structures retail ou etablissements multisites : notre organisation s'adapte a votre parc.",
   },
 ];
 
@@ -351,28 +346,92 @@ export default function PartnershipPage() {
               </h2>
             </div>
 
-            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-              {advantages.map(({ icon: Icon, title, description }) => (
-                <motion.div
-                  key={title}
-                  initial={{ opacity: 0, y: 18 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.45 }}
-                  className="rounded-[30px] border border-border bg-[#f5f5f7] p-6"
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white shadow-[0_10px_30px_rgba(15,23,42,0.08)]">
-                    <Icon className="h-5 w-5 text-foreground" />
+            <div className="grid gap-5 lg:grid-cols-2">
+              {[advantages.slice(0, 3), advantages.slice(3, 6)].map(
+                (column, columnIndex) => (
+                  <div key={columnIndex} className="space-y-5">
+                    {column.map(({ icon: Icon, title, description }, itemIndex) => {
+                      const isDarkCard = (columnIndex + itemIndex) % 2 === 0;
+
+                      return (
+                        <motion.div
+                          key={title}
+                          initial={{ opacity: 0, y: 18 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.45 }}
+                          className={`rounded-[32px] border p-7 shadow-[0_20px_60px_rgba(15,23,42,0.06)] ${
+                            isDarkCard
+                              ? "border-[#111214] bg-[#111214] text-white"
+                              : "border-border bg-[#f5f5f7] text-foreground"
+                          }`}
+                        >
+                          <div className="flex items-start gap-5">
+                            <div
+                              className={`flex h-[52px] w-[52px] flex-none items-center justify-center rounded-2xl ${
+                                isDarkCard
+                                  ? "bg-white/10 text-white"
+                                  : "bg-white text-foreground shadow-[0_10px_30px_rgba(15,23,42,0.08)]"
+                              }`}
+                            >
+                              <Icon className="h-5 w-5" />
+                            </div>
+
+                            <div>
+                              <h3 className="text-xl font-semibold tracking-tight">
+                                {title}
+                              </h3>
+                              <p
+                                className={`mt-3 text-sm leading-7 ${
+                                  isDarkCard
+                                    ? "text-white/70"
+                                    : "text-muted-foreground"
+                                }`}
+                              >
+                                {description}
+                              </p>
+                            </div>
+                          </div>
+                        </motion.div>
+                      );
+                    })}
                   </div>
-                  <h3 className="mt-5 text-xl font-semibold tracking-tight">
-                    {title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                    {description}
-                  </p>
-                </motion.div>
-              ))}
+                ),
+              )}
             </div>
+          </div>
+        </section>
+
+        <section className="px-6 pb-24">
+          <div className="mx-auto max-w-[1120px]">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="relative overflow-hidden rounded-[36px] border border-black/10"
+            >
+              <div
+                className="absolute inset-0 bg-cover bg-center md:bg-fixed"
+                style={{
+                  backgroundImage: `url(${withSiteBase("images/atelier/atelier-ifreedy.jpeg")})`,
+                }}
+              />
+              <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.68),rgba(0,0,0,0.34),rgba(0,0,0,0.18))]" />
+              <div className="relative flex min-h-[230px] items-end p-8 md:min-h-[280px] md:p-10">
+                <div className="max-w-2xl">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/12 text-white backdrop-blur-sm">
+                    <Users className="h-5 w-5" />
+                  </div>
+                  <h2 className="mt-5 text-3xl font-semibold tracking-tight text-white md:text-5xl">
+                    Les entreprises de toutes les tailles !
+                  </h2>
+                  <p className="mt-4 max-w-xl text-sm leading-7 text-white/80 md:text-base">
+                    Il n'y a aucune difference. Profitez des memes services.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </section>
 
