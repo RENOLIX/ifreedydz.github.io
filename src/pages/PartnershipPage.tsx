@@ -22,6 +22,7 @@ import {
 import Navbar from "@/pages/_components/Navbar";
 import Footer from "@/pages/_components/Footer";
 import SocialLinks from "@/components/SocialLinks";
+import PartnersTrustMarquee from "@/components/PartnersTrustMarquee";
 import { withSiteBase } from "@/lib/routing";
 import { siteContact } from "@/lib/site";
 
@@ -334,6 +335,8 @@ export default function PartnershipPage() {
             </motion.div>
           </div>
         </section>
+
+        <PartnersTrustMarquee />
 
         <section id="avantages" className="px-6 py-24">
           <div className="mx-auto max-w-[1120px]">
